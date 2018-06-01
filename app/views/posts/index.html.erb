@@ -1,0 +1,20 @@
+<div class="row py-2">
+  <div class="col-md-4 order-md-2 md-4 text-center">
+    <div class="card my-4" style="width: 18rem;">
+      <img class="rounded-circle" src="/assets/profile/lion.gif" alt="">
+      <div class="card-body">
+        <h5 class="card-title"><%= current_user.name %></h5>
+        <p class="card-text">팔로우</p>
+          <%= form_tag search_path, method: :get do %>
+            책 검색하기
+            <%= text_field_tag :keyword, params[:keyword] %>
+            <%= submit_tag :search %>
+          <% end %>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 order-md-1">
+    <%= render 'list' %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @user.name %>님의 책짹</h1>
+<% if can? :follow, @user %>
+    <%= link_to 'Follow', follow_user_path(@user), method: :post %>
+<% end %>
+
+Followees : <%= @user.followees.count %>
+Followers : <%= @user.followers.count %>
+
+<%= render 'posts/list' %>
+
+<% if can? :update, @user %>
+<%= link_to 'Edit User', edit_user_registration_path %>
+<% end %>

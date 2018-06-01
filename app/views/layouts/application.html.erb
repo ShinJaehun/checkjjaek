@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>책짹</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <!--fontawesome - 아이콘 갖다 쓰는거-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #FF8000;">
+      <%= link_to '책짹', root_path, class: "navbar-brand" %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown"><%= link_to current_user.name, current_user, class: "nav-link dropdown-toggle", id: "navbarDropdown" %></li>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            <li class="nav-item"><%= link_to :Sign_out, destroy_user_session_path, method: :delete, class: "nav-link"  %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to :Sign_in, new_user_session_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+        
+        <%= form_tag posts_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+          <!--엔터를 치고나서 text_field에 검색했던 값이 남아있도록 하기 위해 params을 넣어둠...-->
+          <%= text_field_tag :content, params[:content], class: "form-control mr-sm-2", placeholder: "검색어를 입력해주세요" %>
+          <%= submit_tag :검색, class: "btn btn-light" %>
+        <% end %>
+      </div>
+    </nav>
+    
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

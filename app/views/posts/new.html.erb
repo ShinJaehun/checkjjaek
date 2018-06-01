@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-header text-center">
+    새 글 작성하기
+  </div>
+  <div class="card-body">
+      <p>
+        <strong>Title:</strong>
+        <%= params[:title] %>
+      </p>
+      
+      <p>
+        <strong>Author:</strong>
+        <%= params[:author] %>
+      </p>
+      
+      
+      <p>
+        <strong>Image:</strong>
+        <%= image_tag params[:image] + "?type=m4" %>
+      </p>
+      
+      
+      <p>
+        <strong>Isbn:</strong>
+        <%= params[:isbn] %>
+      </p>
+      
+      <p>
+        <strong>Publisher:</strong>
+        <%= params[:publisher] %>
+      </p>
+
+      <%= form_for(@post) do |form| %>
+      
+        <%= form.hidden_field :book_id, :value => @post.book.id %>
+      
+        <div class="field">
+          <%= form.label :content %>
+          <%= form.text_field :content, require: true %>
+        </div>
+      
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+        
+      <% end %>
+    
+  </div>
+</div>
+
+
+<%= link_to 'Back', posts_path %>

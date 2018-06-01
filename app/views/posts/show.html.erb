@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user.name %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.book.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @post.book.author %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @post.book.image %>
+</p>
+
+      
+<p>
+  <strong>Isbn:</strong>
+  <%= @post.book.isbn %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @post.book.publisher %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+
+<!--좋아요 카운트-->
+
+<p>
+  <% if !@post.like_users.include?(current_user)%>
+                <%#= link_to( "<i class="fas fa-heart"></i>".html_safe, like_post_path(post), method: :post )%>
+   <%= link_to( content_tag(:i, "",class: ["far", "fa-heart"]), like_post_path(@post), method: :post )%>
+  <%else %>
+   <%= link_to( content_tag(:i, "",class: ["fas", "fa-heart"]), like_post_path(@post), method: :post )%>
+  <% end %>
+</p>
+
+
+<!-- 좋아요 버튼 -->
+<p>
+  <%= link_to '좋아요', like_post_path, method: :post %>
+</p>
+
+<!--디버깅을 위해 좋아요 버튼을 누른 사용자 id 표시-->
+<%#= @post.like_users.ids %>
+
+<!-- cancan으로 manage 가능한 @post인 경우 Edit 표시 -->
+<%# if @post.user == current_user %>
+<% if can? :manage, @post %>
+  <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+
+<%= link_to 'Back', posts_path %>
