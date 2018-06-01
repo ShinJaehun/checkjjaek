@@ -1,16 +1,26 @@
-
-<p id="notice"><%= notice %></p>
-
-<h1><%= @user.name %>님의 책짹</h1>
-<% if can? :follow, @user %>
-    <%= link_to 'Follow', follow_user_path(@user), method: :post %>
-<% end %>
-
-Followees : <%= @user.followees.count %>
-Followers : <%= @user.followers.count %>
-
-<%= render 'posts/list' %>
-
-<% if can? :update, @user %>
-<%= link_to 'Edit User', edit_user_registration_path %>
-<% end %>
+<div class="row py-2">
+  <div class="col-md-4 order-md-2 md-4 text-center">
+    <div class="card my-4" style="width: 18rem;">
+      <img class="rounded-circle" src="/assets/profile/yjw.jpg" alt="" width=270, height=270>
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.name %>님의 책짹</h5>
+        <p class="card-text">
+            팔로잉 : <%= @user.followees.count %>
+        </p>
+        <p class="card-text">
+            팔로워 : <%= @user.followers.count %>
+        </p>
+        <% if can? :follow, @user %>
+          <% if @user.followers.include?(current_user) %>
+            <%= link_to 'unfollow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to 'follow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 order-md-1">
+    <%= render 'posts/list' %>
+  </div>
+</div>

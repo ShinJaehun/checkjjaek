@@ -1,6 +1,49 @@
-<h1>Editing Post</h1>
+<div class="card">
+  <div class="card-header text-center">
+    수정하기
+  </div>
+  <div class="card-body">
+      <p>
+        <strong>Title:</strong>
+        <%= @post.book.title %>
+      </p>
+      
+      <p>
+        <strong>Author:</strong>
+        <%= @post.book.author %>
+      </p>
+      
+      <p>
+        <strong>Image:</strong>
+        <%= image_tag "http://#{@post.book.image}" %>
+      </p>
 
-<%= render 'form', post: @post %>
+      <p>
+        <strong>Isbn:</strong>
+        <%= @post.book.isbn %>
+      </p>
+      
+      <p>
+        <strong>Publisher:</strong>
+        <%= @post.book.publisher %>
+      </p>
 
-<%= link_to 'Show', @post %> |
+      <%= form_for(@post) do |form| %>
+      
+        <%= form.hidden_field :book_id, :value => @post.book.id %>
+      
+        <div class="text_area">
+          <%= form.label :content %>
+          <%= form.text_area :content, require: true %>
+        </div>
+      
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+        
+      <% end %>
+    
+  </div>
+</div>
+
 <%= link_to 'Back', posts_path %>

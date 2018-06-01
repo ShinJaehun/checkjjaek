@@ -1,29 +1,15 @@
 <div class="row py-2">
   <div class="col-md-4 order-md-2 md-4 text-center">
-    <div class="card" style="width: 18rem;">
-      <img class="rounded-circle" src="/assets/profile/lion.gif" alt="">
+    <div class="card my-4" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title"><%= @user_name %></h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">추천 사용자</h5>
+          <% @users.each do |u| %>
+            <p class = "card-text" ><%= link_to u.name, u %></p>
+          <% end %>
       </div>
     </div>
   </div>
-  
   <div class="col-md-8 order-md-1">
-    <% @posts.each do |post| %>
-    <div class="media">
-      <%#= image_tag post.image.url(:thumb), class: "align-self-center mr-3" %>
-      <div class="media-body">
-        <h6 class="mt-0"><%= post.user.name %></h6>
-        <p><%= render_with_hashtags(post.content) %></p>
-        <%= link_to 'Show', post %>
-        <% if can? :manage, post %>
-          <%= link_to 'Edit', edit_post_path(post) %>
-          <%= link_to 'Destroy', post, method: :delete, data: { confirm: '삭제하시겠습니까?' } %>
-        <% end %>
-      </div>
-    </div>
-    <% end %>
+    <%= render 'posts/list' %>
   </div>
 </div>

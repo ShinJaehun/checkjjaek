@@ -34,9 +34,8 @@
       
         <%= form.hidden_field :book_id, :value => @post.book.id %>
       
-        <div class="field">
-          <%= form.label :content %>
-          <%= form.text_field :content, require: true %>
+        <div class="text_area">
+          <%= form.text_area :content, require: true, placeholder: '이 책을 읽고 무엇을 느꼈나요?' %>
         </div>
       
         <div class="actions">

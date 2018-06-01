@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # GET 'users/:id'
   def show
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
   end
   
   # POST 'users/:id/follow'

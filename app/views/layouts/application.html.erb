@@ -21,23 +21,35 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
-            <li class="nav-item dropdown"><%= link_to current_user.name, current_user, class: "nav-link dropdown-toggle", id: "navbarDropdown" %></li>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.name %>
+            </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Another action</a>
+                <%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                <a class="dropdown-item" href="#">사용자 정보 수정</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <%= link_to '내가 쓴 포스트', current_user, class: "dropdown-item" %>
               </div>
-            <li class="nav-item"><%= link_to :Sign_out, destroy_user_session_path, method: :delete, class: "nav-link"  %></li>
+            <li class="nav-item"></li>
           <% else %>
-            <li class="nav-item"><%= link_to :Sign_in, new_user_session_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to '로그인', new_user_session_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to '회원가입', new_user_registration_path, class: "nav-link" %></li>
           <% end %>
         </ul>
-        
-        <%= form_tag posts_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
-          <!--엔터를 치고나서 text_field에 검색했던 값이 남아있도록 하기 위해 params을 넣어둠...-->
-          <%= text_field_tag :content, params[:content], class: "form-control mr-sm-2", placeholder: "검색어를 입력해주세요" %>
-          <%= submit_tag :검색, class: "btn btn-light" %>
-        <% end %>
+    
+        <div class="mr-sm-5" style="align:left">
+          <%= form_tag search_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+            <%= text_field_tag :keyword, params[:keyword], require: true, class: "form-control mr-sm-2", placeholder: "읽은 책 제목을 입력해주세요." %>
+            <%= submit_tag '책 찾기', class: "btn btn-light" %>
+          <% end %>
+        </div>
+        <div>
+          <%= form_tag posts_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+            <!--엔터를 치고나서 text_field에 검색했던 값이 남아있도록 하기 위해 params을 넣어둠...-->
+            <%= text_field_tag :content, params[:content], class: "form-control mr-sm-2", placeholder: "키워드를 입력해주세요" %>
+            <%= submit_tag '검색하기', class: "btn btn-light" %>
+          <% end %>
+        </div>
       </div>
     </nav>
     

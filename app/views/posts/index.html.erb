@@ -4,15 +4,20 @@
       <img class="rounded-circle" src="/assets/profile/lion.gif" alt="">
       <div class="card-body">
         <h5 class="card-title"><%= current_user.name %></h5>
-        <p class="card-text">팔로우</p>
-          <%= form_tag search_path, method: :get do %>
-            책 검색하기
-            <%= text_field_tag :keyword, params[:keyword] %>
-            <%= submit_tag :search %>
-          <% end %>
-        </button>
+        <p class="card-text">팔로잉 : <%= current_user.followees.count %></p>
+        <p class="card-text">팔로워 : <%= current_user.followers.count %></p>
       </div>
     </div>
+    <div class="card my-4" style="width: 18rem;">
+
+      <div class="card-body">
+        <h5 class="card-title">추천 사용자</h5>
+          <% @users.each do |u| %>
+            <p class = "card-text" ><%= link_to u.name, u %></p>
+          <% end %>
+      </div>
+    </div>
+    
   </div>
   <div class="col-md-8 order-md-1">
     <%= render 'list' %>

@@ -1,26 +1,49 @@
-    <% @posts.each do |post| %>
-    <div class="card my-4">
-      <div class="media py-2">
-        <%#= image_tag post.image.url(:thumb), class: "align-self-center mr-3" %>
-        <div class="media">
-           <%= image_tag "http://#{post.book.image}", class: "border mx-3", width:'180px' %>
-          <div class="media-body" >
-            <h6 style= "">작성자: <%= link_to post.user.name, post.user %></h6>
-            <h5 class="card-title"><%= post.book.title %><small> (<%= post.like_users.count %>) </small></h5> 
-            <p><%= render_with_hashtags(post.content) %></p>
+<% @posts.each do |post| %>
+<div class="card my-4">
+  <div class="media py-2">
+    <%#= image_tag post.image.url(:thumb), class: "align-self-center mr-3" %>
+    <div class="media">
+       <%= image_tag "http://#{post.book.image}", class: "border mx-3", width:'180px' %>
+      <div class="media-body", width:'600px'>
+        <h6 class="card-title"><%= post.book.title %> - <%= post.book.author %></h6>
+       <div style="font-size:12px; position:absolute; right:5px;" >좋아하는 사람: <%= post.like_users.count %> 명 </div> 
+
+       
+        <p style= "font-size:14px; ">
+          작성자: <%= link_to post.user.name, post.user %> &emsp;
+            <% if !post.like_users.include?(current_user)%>
+              <%= link_to( content_tag(:i, "",class: ["far", "fa-heart"]), like_post_path(post), method: :post )%>
+            <% else %>
+              <%= link_to( content_tag(:i, "",class: ["fas", "fa-heart"]), like_post_path(post), method: :post )%>
+            <% end %>
+        </p>
+          <div style ="font-size:12px;padding-right: 10px; height: 100px; overflow: hidden;">
+            <%= render_with_hashtags(post.content) %>
           </div>
+        <div>
+          </br>
           <% if can? :manage, post %>
             <%= link_to 'Edit', edit_post_path(post) %>
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: '삭제하시겠습니까?' } %>
-            <% if !post.like_users.include?(current_user)%>
-                <%= link_to( content_tag(:i, "",class: ["far", "fa-heart"]), like_post_path(post), method: :post )%>
-            <% else %>
-                <%= link_to( content_tag(:i, "",class: ["fas", "fa-heart"]), like_post_path(post), method: :post )%>
-            <% end %>
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: '당신의 게시글이 삭제될 위기입니다. 정말 삭제하시겠습니까?' } %>
           <% end %>
-          <%= link_to 'Show', post %> <div style="position:absolute; bottom:5px;right:5px;"><%= post.created_at.strftime("%y. %m. %d ") %> </div> 
-
         </div>
-      </div>     
+        
+
     </div>
-    <% end %>
+    <div style="position:absolute; bottom:5px;right:5px;">
+    <div style = "font-size:10px;"><%= link_to '자세히 보기', post %></div>
+     <%= post.created_at.strftime("%y. %m. %d ") %> 
+    </div> 
+
+    <%# post.comments.each do |c| %>
+      <!--p><%#= c.content %> / <%#= c.user.email %></p-->
+    <%# end %>
+
+    <%#= form_for Comment.new, url: post_comments_path(post.id) do |f| %>
+      <%#= f.text_field :content %>
+      <%#= f.submit %>
+    <%# end %>
+    </div>
+  </div>     
+</div>
+<% end %>

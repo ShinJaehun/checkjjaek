@@ -14,12 +14,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @users = User.all
+
     # @posts = Post.all
     # 마지막에 자기 자신이 쓴 글 까지 추가하기 위해서 push했음
     if params.has_key?(:content)
-      @posts = Post.where('content like ?', "%#{params[:content]}%")
+      @posts = Post.where('content like ?', "%#{params[:content]}%").order(created_at: :desc)
     else 
-      @posts = Post.where(user_id: current_user.followees.ids.push(current_user.id))
+      @posts = Post.where(user_id: current_user.followees.ids.push(current_user.id)).order(created_at: :desc)
     end
   end
 
@@ -57,7 +59,7 @@ class PostsController < ApplicationController
       @book = Book.create(
         title: params[:title],
         isbn:  params[:isbn],
-        author:  params[:authro],
+        author:  params[:author],
         image:  image_path,
         publisher: params[:publisher]
       )  
@@ -129,6 +131,7 @@ class PostsController < ApplicationController
   def hashtags
     tag = Tag.find_by(name: params[:name])
     @posts = tag.posts
+    @users = User.all
   end
 
   private

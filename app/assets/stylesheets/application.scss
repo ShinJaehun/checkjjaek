@@ -14,3 +14,18 @@
 
 @import 'bootstrap';
 @import 'signin';
+
+a:hover {
+    color: red;
+    text-decoration: none;
+}
+a  {
+ color : black; 
+ font-weight: bold;
+}
+
+textarea {
+    height: 100px;
+    width: 300px;
+    margin-bottom: 5px;
+ }

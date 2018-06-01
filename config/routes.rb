@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   resources :posts do
     post 'like', to: 'posts#like', as: :like, on: :member
+      resources :comments, only: [:create, :destroy]
     # posts/:post_id/like  member를 붙이지 않으면
     # posts/:id/like member를 붙이면…
     #둘 다 post의 ID를 의미하지만 

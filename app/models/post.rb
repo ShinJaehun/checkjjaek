@@ -10,6 +10,9 @@ class Post < ApplicationRecord
   belongs_to :user
 
   belongs_to :book
+  
+  # Comment
+  has_many :comments
 
   # Post와 User의 likes를 통한 N:N 관계
   has_many :likes
