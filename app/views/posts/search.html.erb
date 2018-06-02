@@ -1,30 +1,35 @@
-<div class="container">
-  <h4><b class="text-warning"><%= @keyword %></b>에 대한 검색결과입니다.</a></h4>
-  <table class="table table-hover table-striped">
-    <thead>
-      <th>제목</th>
-      <th>저자</th>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td>
-            <%#= link_to item['title'].html_safe, new_post_path, :data => {:title => item['title'], :isbn => item['isbn']} %>
-            <%= link_to item['title'].html_safe, 
-              new_post_path(
-              title: strip_tags(item['title']),
-              isbn: strip_tags(item['isbn']),
-              author: strip_tags(item['author']),
-              image: strip_tags(item['image']),
-              publisher: strip_tags(item['publisher'])) %>
-          </td>
-          <td>
-            <%= item['author'].html_safe %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  
-</div>
+  <% if @items.present? %>
+    <h4><b class="text-warning"><%= @keyword_book %></b>에 대한 검색결과입니다.</a></h4>
+    <table class="table table-hover table-striped">
+      <thead>
+        <th>제목</th>
+        <th>책표지</th>
+        <th>저자</th>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td>
+              <%#= link_to item['title'].html_safe, new_post_path, :data => {:title => item['title'], :isbn => item['isbn']} %>
+              <%= link_to item['title'].html_safe, 
+                new_post_path(
+                title: strip_tags(item['title']),
+                isbn: strip_tags(item['isbn']),
+                author: strip_tags(item['author']),
+                image: strip_tags(item['image']),
+                publisher: strip_tags(item['publisher'])) %>
+            </td>
+            <td>
+              <%= image_tag strip_tags(item['image']) %>
+            </td>
+            <td>
+              <%= item['author'].html_safe %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <!--검색어를 입력해주세요.-->
+  <% end %>
 

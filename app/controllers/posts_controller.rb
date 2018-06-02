@@ -33,20 +33,27 @@ class PostsController < ApplicationController
   def search
     # @post = Post.new
     # Post.set_book_data(params[:keyword])
-    @keyword = params[:keyword]
+    if params.has_key?(:keyword_book)
+      @keyword_book = params[:keyword_book]
       
-    url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword + "&display=10&start=1"
-    uri = URI.encode(url)
-    res = RestClient.get(uri, headers={ 'X-Naver-Client-Id' => 'GCDuCNDURZvBzhGoo7iL', 'X-Naver-Client-Secret' => '_MpznoTrPe' })
-      
-    unitokor = eval(res)
-      
-    # puts unitokor
-      
-    json_g = JSON.generate(unitokor)
-    hash = JSON.parse(json_g)
-      
-    @items = hash['items']
+      if @keyword_book.present?
+        
+        url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=10&start=1"
+        uri = URI.encode(url)
+        res = RestClient.get(uri, headers={ 'X-Naver-Client-Id' => 'GCDuCNDURZvBzhGoo7iL', 'X-Naver-Client-Secret' => '_MpznoTrPe' })
+          
+        unitokor = eval(res)
+          
+        # puts unitokor
+          
+        json_g = JSON.generate(unitokor)
+        hash = JSON.parse(json_g)
+          
+        @items = hash['items']
+      end
+    
+    end
+    @items ||= []
   end
 
   # GET /posts/new
@@ -129,9 +136,9 @@ class PostsController < ApplicationController
   end
   
   def hashtags
-    tag = Tag.find_by(name: params[:name])
-    @posts = tag.posts
-    @users = User.all
+      tag = Tag.find_by(name: params[:name])
+      @posts = tag.posts
+      @users = User.all
   end
 
   private
