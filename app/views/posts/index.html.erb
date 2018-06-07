@@ -1,4 +1,5 @@
 <div class="row py-2">
+
   <div class="col-md-4 order-md-2 md-4 text-center">
     <div class="card my-4" style="width: 18rem;">
       <img class="rounded-circle" src="/assets/profile/lion.gif" alt="">
@@ -8,8 +9,9 @@
         <p class="card-text">팔로워 : <%= current_user.followers.count %></p>
       </div>
     </div>
-    <div class="card my-4" style="width: 18rem;">
 
+    <div class="card my-4" style="width: 18rem;">
+      <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
       <div class="card-body">
         <h5 class="card-title">추천 사용자</h5>
           <% @users.each do |u| %>
@@ -17,9 +19,10 @@
           <% end %>
       </div>
     </div>
-    
   </div>
+
   <div class="col-md-8 order-md-1">
     <%= render 'list' %>
   </div>
+
 </div>

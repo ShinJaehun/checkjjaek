@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   # User와 Post의 1:N 관계
   belongs_to :user
 
+  # Book과 Post의 1:N 관계
   belongs_to :book
   
   # Comment
@@ -29,18 +30,28 @@ class Post < ApplicationRecord
     end
   end
 
-  # Post, hashtag 해시태그 관련....
+  # Post와 hashtag의 N:N 관계
+  # 이렇게 해도 posts_tags라는 Join 테이블이 자동으로 생성됨
   has_and_belongs_to_many :tags
   
+  # post instance를 생성하고 나서 사용자가 입력한 content에서 항상 태그를 찾고 
+  # tags 테이블의 name을 조회해서 tag를 가져오거나 새로 생성하여 
+  # 해당 post의 tags hash에 추가함
+  # after_create : deprecated라는데 뭘 대신 써야 하는지 모르겠다...
   after_create do
     post = Post.find_by(id: self.id)
     hashtags = self.content.scan(/#\s*\S*|#\S*\s*/)
+    # /#\s*\S*|#\S*\s*/ : white space character와 매칭되는 문자는 모두 선택
     hashtags.uniq.map do |hashtag|
+    #uniq : 중복되는 element는 제거해서 return하는 method
       tag = Tag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      #find_or_create_by : DB에서 해당 attribute가 포함된 record를 찾아 return 없다면 새로 생성
       post.tags << tag
     end
   end
 
+  # post를 업데이트할 때는 기존에 저장되어 있던 post의 tags들도 모두 지웠다가
+  # 업데이트 전에 다시 사용자가 입력한 content에서 태그를 찾아 tags hash에 갱신함
   before_update do
     post = Post.find_by(id: self.id)
     post.tags.clear
@@ -50,6 +61,5 @@ class Post < ApplicationRecord
       post.tags << tag
     end
   end
-
 
 end

@@ -13,11 +13,11 @@
               <%#= link_to item['title'].html_safe, new_post_path, :data => {:title => item['title'], :isbn => item['isbn']} %>
               <%= link_to item['title'].html_safe, 
                 new_post_path(
-                title: strip_tags(item['title']),
-                isbn: strip_tags(item['isbn']),
-                author: strip_tags(item['author']),
-                image: strip_tags(item['image']),
-                publisher: strip_tags(item['publisher'])) %>
+                  title: strip_tags(item['title']),
+                  isbn: strip_tags(item['isbn']),
+                  author: strip_tags(item['author']),
+                  image: strip_tags(item['image']),
+                  publisher: strip_tags(item['publisher'])) %>
             </td>
             <td>
               <%= image_tag strip_tags(item['image']) %>

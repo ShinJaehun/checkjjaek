@@ -40,8 +40,8 @@
         <div class="mr-sm-5">
           <%= form_tag search_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
           <!--<div class="navbar navbar-expand-lg navbar-dark; badge badge-Dark" style="width: 150px; height:35px; font-size:17px;">-->
-          <!--  게시글 등록하기-->
-          <!--  </div>-->
+          <!--게시글 등록하기-->
+          <!--</div>-->
             <%= text_field_tag :keyword_book, params[:keyword_book], require: true, class: "form-control mr-sm-2", placeholder: "게시할 책을 입력해주세요." %>
             <%= submit_tag '책 찾기', class: "btn btn-light" %>
           <% end %>
@@ -50,8 +50,8 @@
           <%= form_tag posts_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
             <!--엔터를 치고나서 text_field에 검색했던 값이 남아있도록 하기 위해 params을 넣어둠...-->
             <!--<div class="navbar navbar-expand-lg navbar-dark; badge badge-info" style="width: 150px; height:35px; font-size:17px;">-->
-            <!--  책짹 검색하기  -->
-            <!--  </div>-->
+            <!-- 책짹 검색하기  -->
+            <!--</div>-->
             <%= text_field_tag :content, params[:content], class: "form-control mr-sm-2", placeholder: "키워드를 입력해주세요" %>
             <%= submit_tag '검색하기', class: "btn btn-light" %>
           <% end %>

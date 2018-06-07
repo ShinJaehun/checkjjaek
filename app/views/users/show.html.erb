@@ -10,6 +10,8 @@
         <p class="card-text">
             팔로워 : <%= @user.followers.count %>
         </p>
+        
+        <!-- 준우 샘이 도와주신 follow/unfollow 버튼 처리 -->
         <% if can? :follow, @user %>
           <% if @user.followers.include?(current_user) %>
             <%= link_to 'unfollow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
@@ -17,9 +19,11 @@
             <%= link_to 'follow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
           <% end %>
         <% end %>
+        
       </div>
     </div>
   </div>
+  
   <div class="col-md-8 order-md-1">
     <%= render 'posts/list' %>
   </div>
