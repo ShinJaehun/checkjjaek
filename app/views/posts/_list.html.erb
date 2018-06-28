@@ -1,48 +1,54 @@
+<!--게시글 등록하기-->      
+<%= form_tag search_path, method: :get, class: "input-group mt-4" do %>
+  <%= text_field_tag :keyword_book, params[:keyword_book], require: true, class: "form-control", placeholder: "무슨 책을 읽었나요?" %>
+  <div class="input-group-append">
+    <%= submit_tag '책 찾기', class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>
+
+<!--posts list-->
 <% @posts.each do |post| %>
-<div class="card my-4">
-  <div class="media py-2">
-    
-    <div class="media">
+  <div class="card my-4">
+    <div class="media py-3">
+      <!--책 이미지-->
       <%= image_tag "http://#{post.book.image}", class: "border mx-3", width:'180px' %>
+  
+      <!--포스트 내용-->
       <div class="media-body", width:'600px'>
-        <h6 class="card-title"><%= post.book.title %> - <%= post.book.author %></h6>
-        
-        <div style="font-size:12px; position:absolute; right:5px;" >
-          좋아하는 사람 : <%= post.like_users.count %> 명
-        </div> 
-        
-        <p style= "font-size:14px; ">
-          작성자: <%= link_to post.user.name, post.user %> &emsp;
+        <!--책 제목-->
+        <h6 class="card-title mb-2"><%= link_to post.book.title, post %></h6>
+        <!--저자-->
+        <div class="card-subtitle mb-2 text-muted"><%= post.book.author %></div>
+        <!--포스트 정보-->
+        <div class="list-post-info mb-2">
+          <%= post.created_at.strftime("%y. %m. %d ") %> <%= link_to post.user.name, post.user %>님이 작성했습니다. &emsp;
           
           <!-- fontawesome으로 만든 좋아요 버튼 -->
           <% if !post.like_users.include?(current_user)%>
-            <%= link_to( content_tag(:i, "",class: ["far", "fa-heart"]), like_post_path(post), method: :post )%>
+            <%= link_to( content_tag(:i, "",class: ["far", "fa-thumbs-up"]), like_post_path(post), method: :post )%>
           <% else %>
-            <%= link_to( content_tag(:i, "",class: ["fas", "fa-heart"]), like_post_path(post), method: :post )%>
+            <%= link_to( content_tag(:i, "",class: ["fas", "fa-thumbs-up"]), like_post_path(post), method: :post )%>
           <% end %>
-        </p>
+  
+          <% if post.like_users.count > 0 %>
+            <i class="fas fa-times"></i>
+            <%= post.like_users.count %>
+          <% end %>
+        </div>
         
-        <!-- 해시태그 -->
-        <div style ="font-size:12px;padding-right: 10px; height: 100px; overflow: hidden;">
+        <!-- 해시태그를 처리한 본문 -->
+        <div class="list-content">
           <%= render_with_hashtags(post.content) %>
         </div>
         
         <!-- 수정, 삭제 버튼 -->
-        <div>
+        <div class="list-button-groups">
           <% if can? :manage, post %>
-            <%= link_to 'Edit', edit_post_path(post), class: "btn btn-warning btn-sm" %>
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "btn btn-danger btn-sm" %>
+            <%= link_to '수정', edit_post_path(post), class: "btn btn-warning btn-sm" %>
+            <%= link_to '삭제', post, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "btn btn-danger btn-sm" %>
           <% end %>
         </div>
       </div>
-      
-      <!-- 자세히 보기 버튼과 created_at 예쁘게 출력하기 -->
-      <div style="position:absolute; bottom:5px;right:5px;">
-        <div style = "font-size:10px;">
-          <%= link_to '자세히 보기', post %>
-        </div>
-        <%= post.created_at.strftime("%y. %m. %d ") %> 
-      </div> 
   
       <%# post.comments.each do |c| %>
         <!--p><%#= c.content %> / <%#= c.user.email %></p-->
@@ -53,7 +59,7 @@
         <%#= f.submit %>
       <%# end %>
     </div>
-  </div>     
-</div>
+      
+  </div>
 
 <% end %>

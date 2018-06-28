@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+  <div class="container">
+    <%= link_to '책짹', root_path, class: "navbar-brand" %>
+
+    <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-content">
+
+      <!-- Links -->
+
+       <ul class="navbar-nav mr-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+              <%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              <a class="dropdown-item" href="#">사용자 정보 수정</a>
+              <div class="dropdown-divider"></div>
+              <%= link_to '내가 쓴 포스트', current_user, class: "dropdown-item" %>
+            </div>  
+          </li>
+        <% else %>
+          <li class="nav-item"><%= link_to '로그인', new_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to '회원가입', new_user_registration_path, class: "nav-link" %></li>
+        <% end %>
+      </ul>
+      
+      <!-- 책짹 검색하기  -->
+      <div class="mr-sm-5">
+        <%= form_tag posts_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+          <%= text_field_tag :content, params[:content], class: "form-control mr-sm-2", placeholder: "키워드를 입력하세요." %>
+          <!--엔터를 치고나서 text_field에 검색했던 값이 남아있도록 하기 위해 params을 넣어둠...-->
+          <%= submit_tag '검색하기', class: "btn btn-light" %>
+        <% end %>
+      </div>
+      
+    </div>  
+  </div>
+</nav>
