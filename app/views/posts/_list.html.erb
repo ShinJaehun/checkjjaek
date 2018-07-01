@@ -48,16 +48,24 @@
             <%= link_to '삭제', post, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "btn btn-danger btn-sm" %>
           <% end %>
         </div>
+  
+        <!--댓글-->
+        <div class="list-comments-groups">
+          <div class="list-comments-list">
+            <% post.comments.each do |c| %>
+              <p><%= c.content %> / <%= c.user.email %></p>
+            <% end %>
+          </div>
+          <div class="list-comments-input">
+            <%= form_for Comment.new, url: post_comments_path(post.id) do |f| %>
+              <%= f.text_field :content %>
+              <%= f.submit %>
+            <% end %>
+          </div>    
+        </div>
+  
       </div>
   
-      <%# post.comments.each do |c| %>
-        <!--p><%#= c.content %> / <%#= c.user.email %></p-->
-      <%# end %>
-  
-      <%#= form_for Comment.new, url: post_comments_path(post.id) do |f| %>
-        <%#= f.text_field :content %>
-        <%#= f.submit %>
-      <%# end %>
     </div>
       
   </div>

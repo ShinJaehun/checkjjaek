@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   # Book과 Post의 1:N 관계
   belongs_to :book
   
-  # Comment
+  # Post와 Comment의 1:N 관계
   has_many :comments
 
   # Post와 User의 likes를 통한 N:N 관계

@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # User와 Post의 1:N 관계
   has_many :posts
   
-  # Comment
+  # User와 Comment의 1;N 관계
   has_many :comments
   
   # User와 Post의 likes를 통한 N:N 관계
