@@ -53,11 +53,12 @@
         <div class="list-comments-groups">
           <div class="list-comments-list">
             <% post.comments.each do |c| %>
-              <p><%= c.content %> / <%= c.user.email %></p>
+              <p><%= c.user.name %> | <%= c.content %> </p>
             <% end %>
           </div>
           <div class="list-comments-input">
             <%= form_for Comment.new, url: post_comments_path(post.id) do |f| %>
+              <%= post.user.name %>
               <%= f.text_field :content %>
               <%= f.submit %>
             <% end %>

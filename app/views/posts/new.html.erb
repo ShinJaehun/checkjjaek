@@ -33,8 +33,9 @@
     
       <%= form.hidden_field :book_id, :value => @post.book.id %>
     
+      <!--아... 이거 졸라 힘들었어요. text_area에 maxlength가 없어서-->
       <div class="text_area">
-        <%= form.text_area :content, require: true, placeholder: '이 책을 읽고 무엇을 느꼈나요?' %>
+        <%= form.text_area :content, onKeyup: 'len_chk(200)', require: true, placeholder: '이 책을 읽고 무엇을 느꼈나요?' %>
       </div>
     
       <div class="actions">
