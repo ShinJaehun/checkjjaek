@@ -6,7 +6,8 @@
   <div class="card-body">
     <p>
       <strong>Title:</strong>
-      <%= params[:title] %>
+      <!--책 제목에 &가 있으면 &amp;가 붙는데 amp;를 없이 출력 -->
+      <%= params[:title].gsub(/&amp;/, "&") %>
     </p>
     
     <p>
