@@ -13,7 +13,7 @@ class Post < ApplicationRecord
   belongs_to :book
   
   # Post와 Comment의 1:N 관계
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   # Post와 User의 likes를 통한 N:N 관계
   has_many :likes

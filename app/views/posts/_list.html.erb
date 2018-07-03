@@ -41,14 +41,6 @@
           <%= render_with_hashtags(post.content) %>
         </div>
         
-        <!-- 수정, 삭제 버튼 -->
-        <div class="list-button-groups">
-          <% if can? :manage, post %>
-            <%= link_to '수정', edit_post_path(post), class: "btn btn-warning btn-sm" %>
-            <%= link_to '삭제', post, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "btn btn-danger btn-sm" %>
-          <% end %>
-        </div>
-  
         <!--댓글-->
         <div class="list-comments-groups">
           <div class="list-comments-list">
