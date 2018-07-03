@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   # Post를 입력할 때 content를 반드시 입력해야 함
-  validates :content, presence: { message: '내용을 입력하세요.' }
+  validates :content, presence: { message: '내용을 입력하세요.' }, length: { maximum: 200 }
 
   # User와 Post의 관계 때문에 모든 Post는 입력한
   # 사용자의 ID 필드가 입력되어 있어야 함
