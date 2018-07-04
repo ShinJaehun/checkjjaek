@@ -82,6 +82,9 @@ footer {
 
 /* posts index list */
 
+.media-body {
+  padding-right: 10px;
+}
 
 .card-subtitle {
   font-size: 14px;
@@ -93,15 +96,17 @@ footer {
   right:5px;
 }
 
-
 .list-content {
   font-size:14px;
-  padding-right: 10px;
   // height: 100px;
   overflow: hidden;  
 }
 
-
+.list-comments-input .form-control {
+  width: 400px;
+  margin-right: 5px;
+  
+}
 
 /* miscellaneous */
 
