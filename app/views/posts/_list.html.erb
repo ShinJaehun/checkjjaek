@@ -8,8 +8,9 @@
 
 <!--posts list-->
 <% @posts.each do |post| %>
+ <!--style="width:40rem;"를 붙이면 card가 고정폭으로 변경됨-->
   <div class="card my-4">
-    <div class="media py-3">
+    <div class="media pt-3">
       <!--책 이미지-->
       <%= image_tag "http://#{post.book.image}", class: "border mx-3", width:'150px' %>
   
@@ -44,8 +45,7 @@
       </div>
   
     </div>
-  
-  
+
     <!--댓글-->
     <div class="list-comments-groups">
       <div class="list-comments-list">
@@ -55,18 +55,17 @@
       </div>
       
       <div class="list-comments-input">
-        <%= form_for Comment.new, url: post_comments_path(post.id), html: { class: "form-inline" } do |f| %>
-          <div class="form-group">
-            <%= f.text_field :content, class: "form-control form-control-sm", placeholder: "댓글을 입력하세요." %>
-          </div>
-          <div class="form-group">
-            <%= f.submit '입력', class: "btn btn-outline-secondary btn-sm" %>
+        <%= form_for Comment.new, url: post_comments_path(post.id), html: { class: "input-group" } do |f| %>
+          <%= f.label current_user.name, class: "form-label" %>
+          <%= f.text_field :content, class: "form-control form-control-sm", placeholder: "댓글을 입력하세요." %>
+          <div class="input-group-btn">
+            <%= f.submit '입력', class: "btn btn-outline-secondary btn-sm" %>  
           </div>
         <% end %>
       </div>
-      
+    
     </div>
-      
+    
   </div>
 
-<% end %>
+<% end %>  

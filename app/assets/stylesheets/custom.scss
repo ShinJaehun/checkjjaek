@@ -82,6 +82,10 @@ footer {
 
 /* posts index list */
 
+.col-md-8 .input-group .form-control {
+  border-radius: 0.25rem;
+}
+
 .media-body {
   padding-right: 10px;
 }
@@ -102,10 +106,15 @@ footer {
   overflow: hidden;  
 }
 
+.list-comments-groups {
+  padding: 20px 50px;
+  // border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 .list-comments-input .form-control {
-  width: 400px;
+  border-radius: 0.25rem;
+  margin-left: 5px;
   margin-right: 5px;
-  
 }
 
 /* miscellaneous */
