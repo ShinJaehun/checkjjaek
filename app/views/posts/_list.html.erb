@@ -50,13 +50,19 @@
     <div class="list-comments-groups">
       <div class="list-comments-list">
         <% post.comments.each do |c| %>
-          <p><%= c.user.name %> | <%= c.content %> </p>
+          <p>
+            <%= c.user.name %> | <%= c.content %> 
+            <!--댓글 옆에 댓글 삭제 버튼 만들어 놓기-->
+            <% if can? :destroy, c %>
+              <%= link_to( content_tag(:i, "",class: ["far", "fa-times-circle"]), post_comment_path(c.post, c), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } )%>
+            <% end %>
+          </p>
         <% end %>
       </div>
       
       <div class="list-comments-input">
         <%= form_for Comment.new, url: post_comments_path(post.id), html: { class: "input-group" } do |f| %>
-          <%= f.label current_user.name, class: "form-label" %>
+          <%= f.label current_user.name, class: "form-label form-label-sm" %>
           <%= f.text_field :content, class: "form-control form-control-sm", placeholder: "댓글을 입력하세요." %>
           <div class="input-group-btn">
             <%= f.submit '입력', class: "btn btn-outline-secondary btn-sm" %>  

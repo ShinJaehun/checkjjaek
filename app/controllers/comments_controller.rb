@@ -13,7 +13,9 @@ class CommentsController < ApplicationController
   end
   
   def destroy
-      @comment.destroy
+    @comment.destroy
+    # 댓글 삭제하고 새로고침
+    redirect_back(fallback_location: root_path)
   end
   
   private
