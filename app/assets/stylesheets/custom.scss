@@ -37,6 +37,10 @@ textarea {
 
 .navbar-custom {
   background-color: #FF8000; // height:80px;
+
+  .navbar-brand img {
+    width: 60px;
+  }
   
   /* change the brand and text color */
   .navbar-brand, .navbar-text {
