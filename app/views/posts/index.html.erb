@@ -2,7 +2,10 @@
 
   <div class="col-md-4 order-md-2 md-4 text-center">
     <div class="card my-4" style="width: 18rem;">
-      <img class="rounded-circle" src="/assets/profile/lion.gif" alt="">
+      <div class="profile-image">
+        <!--gravatar image를 profile 이미지로 사용하기-->
+        <%= image_tag avatar_url(current_user), class: "rounded-circle", style: "padding: 30px;" %>  
+      </div>
       <div class="card-body">
         <h5 class="card-title"><%= current_user.name %></h5>
         <p class="card-text">팔로잉 : <%= current_user.followees.count %></p>
