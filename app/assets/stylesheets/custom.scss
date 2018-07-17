@@ -110,10 +110,12 @@ footer {
   overflow: hidden;  
 }
 
+/* posts index list comment */
+
 .thumbnail {
   padding: 0px;
-  width: 50px;
-  height: 50px;  
+  width: 30px;
+  height: 30px;  
 }
 
 .comment-group {
@@ -130,7 +132,7 @@ footer {
 
 .comment-input {
   padding-top: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   .row {
     padding: 0 10px;
   }

@@ -64,7 +64,7 @@
         <%= image_tag avatar_url(current_user), class: "rounded-circle thumbnail user-photo" %>
         <div class="col-panel" style="width:80%">
           <%= form_for Comment.new, url: post_comments_path(post.id), html: { class: "input-group" } do |f| %>
-            <%= f.text_field :content, class: "form-control form-control-sm", placeholder: "댓글을 입력하세요." %>
+            <%= f.text_field :content, maxlength: '200', class: "form-control form-control-sm", placeholder: "댓글을 입력하세요." %>
             <div class="input-group-btn">
               <%= f.submit '입력', class: "btn btn-outline-secondary btn-sm" %>  
             </div>
