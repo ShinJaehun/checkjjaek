@@ -1,0 +1,86 @@
+<!--style="width:40rem;"를 붙이면 card가 고정폭으로 변경됨-->
+<div class="card my-4">
+  
+  <div class="media post-content">
+    <!--책 이미지-->
+    <%= image_tag "http://#{@post.book.image}", class: "border mx-3", width:'150px' %>
+
+    <!--포스트 내용-->
+    <div class="media-body">
+      <!--책 제목-->
+      <h6 class="card-title mb-2"><%= @post.book.title %></h6>
+      <!--저자-->
+      <div class="card-subtitle mb-2 text-muted"><%= @post.book.author %></div>
+      <!--포스트 정보-->
+      <div class="information">
+        <%= "#{time_ago_in_words(@post.created_at)} 전에" %> <%= link_to @post.user.name, @post.user %>님이 작성했습니다.
+        
+        <!-- fontawesome으로 만든 좋아요 버튼 -->
+        <% if !@post.like_users.include?(current_user)%>
+          <%= link_to( content_tag(:i, "",class: ["far", "fa-thumbs-up"]), like_post_path(@post), method: :post )%>
+        <% else %>
+          <%= link_to( content_tag(:i, "",class: ["fas", "fa-thumbs-up"]), like_post_path(@post), method: :post )%>
+        <% end %>
+
+        <% if @post.like_users.count > 0 %>
+          <i class="fas fa-times"></i>
+          <%= @post.like_users.count %>
+        <% end %>
+        
+        <!--수정, 삭제 버튼-->
+        <% if can? :manage, @post %>
+          <%= link_to( content_tag(:i, "",class: ["fas", "fa-edit"]), edit_post_path(@post) )%>
+          <%= link_to( content_tag(:i, "",class: ["fas", "fa-times-circle"]), post_path(@post), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } )%>
+        <% end %>
+        
+        <!--홈으로 가기 버튼-->
+        <%= link_to( content_tag(:i, "",class: ["fas", "fa-home"]), root_path )%>
+
+      </div>
+      
+      <!-- 해시태그를 처리한 본문 -->
+      <div class="content">
+        <%= render_with_hashtags(@post.content) %>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--댓글-->
+  <div class="post-comment">
+    <% @post.comments.each do |c| %>
+      <div class="media">
+        <%= image_tag avatar_url(c.user), class: "rounded-circle user-photo" %>
+          <div class="media-body">
+            <div class="panel-heading">
+              <strong><%= c.user.name %></strong> <span class="text-muted"><%= "#{time_ago_in_words(c.created_at)} 전" %> </span>
+            </div>
+            <div class="panel-body">
+              <%= c.content %> 
+              <!--댓글 옆에 댓글 삭제 버튼 만들어 놓기-->
+              <% if can? :destroy, c %>
+                <%= link_to( content_tag(:i, "",class: ["far", "fa-times-circle"]), post_comment_path(c.post, c), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } )%>
+              <% end %>
+            </div>
+          </div>
+      </div>  
+    <% end %>
+    
+    <!--댓글 입력-->
+    <div class="comment-input">
+      <div class="row">
+        <%= image_tag avatar_url(current_user), class: "rounded-circle user-photo" %>
+        <div class="col-panel" style="width:90%">
+          <%= form_for Comment.new, url: post_comments_path(@post.id), html: { class: "input-group" } do |f| %>
+            <%= f.text_field :content, maxlength: '200', class: "form-control form-control-sm", placeholder: "댓글을 입력하세요." %>
+            <div class="input-group-btn">
+              <%= f.submit '입력', class: "btn btn-outline-secondary btn-sm" %>  
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

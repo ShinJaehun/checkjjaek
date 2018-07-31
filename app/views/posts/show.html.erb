@@ -1,75 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="row py-2">
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user.name %>
-</p>
+  <div class="col-md-4 order-md-2 md-4 text-center">
+    <!-- current_user가 표시되어야 하는가 아니면 글을 작성한 user가 표시되어야 하는가?-->
+    <div class="card my-4" style="width: 18rem;">
+      <div class="profile-image">
+        <!--gravatar image를 profile 이미지로 사용하기-->
+        <%= image_tag avatar_url(current_user), class: "rounded-circle", style: "padding: 30px;" %>  
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= current_user.name %></h5>
+      </div>
+    </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.book.title %>
-</p>
+  </div>
 
-<p>
-  <strong>Author:</strong>
-  <%= @post.book.author %>
-</p>
+  <div class="col-md-8 order-md-1">
+    <%= render 'item' %>
+  </div>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag "http://#{@post.book.image}" %>
-</p>
+</div>
 
-      
-<p>
-  <strong>Isbn:</strong>
-  <%= @post.book.isbn %>
-</p>
-
-<p>
-  <strong>Publisher:</strong>
-  <%= @post.book.publisher %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-
-<!--좋아요 카운트-->
-
-<p>
-  <% if !@post.like_users.include?(current_user)%>
-                <%#= link_to( "<i class="fas fa-heart"></i>".html_safe, like_post_path(post), method: :post )%>
-   <%= link_to( content_tag(:i, "",class: ["far", "fa-heart"]), like_post_path(@post), method: :post )%>
-  <%else %>
-   <%= link_to( content_tag(:i, "",class: ["fas", "fa-heart"]), like_post_path(@post), method: :post )%>
-  <% end %>
-</p>
-
-
-<!-- 좋아요 버튼 -->
-<p>
-  <!--<%= link_to '좋아요', like_post_path, method: :post %>-->
-</p>
-
-<!--디버깅을 위해 좋아요 버튼을 누른 사용자 id 표시-->
-<%#= @post.like_users.ids %>
-
-<!-- cancan으로 manage 가능한 @post인 경우 Edit 표시 -->
-<%# if @post.user == current_user %>
-<% if can? :manage, @post %>
-  <%= link_to 'Edit', edit_post_path(@post) %> |
-<% end %>
-
-        <!-- 수정, 삭제 버튼 -->
-        <div class="list-button-groups">
-          <% if can? :manage, @post %>
-            <%= link_to '수정', edit_post_path(@post), class: "btn btn-warning btn-sm" %>
-            <%= link_to '삭제', @post, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "btn btn-danger btn-sm" %>
-          <% end %>
-        </div>
-
-
-<%= link_to 'Home', posts_path %>

@@ -86,55 +86,66 @@ footer {
 
 /* posts index list */
 
-.col-md-8 .input-group .form-control {
+// .search-group .input-group .form-control {
+.search-book .input-group .form-control {
   border-radius: 0.25rem;
 }
 
-.media-body {
-  padding-right: 10px;
-}
-
-.card-subtitle {
-  font-size: 14px;
-}
-
-.list-post-info {
+.post-content {
+  padding-top: 15px;
+  padding-bottom: 5px;
   font-size:14px;
-  // position:absolute;
-  right:5px;
-}
 
-.list-content {
-  font-size:14px;
-  // height: 100px;
-  overflow: hidden;  
-}
+  .media-body {
+    padding-right: 10px;
+  }
+  
+  .information {
+    padding-bottom: 10px;
+  }
 
-/* posts index list comment */
-
-.thumbnail {
-  padding: 0px;
-  width: 30px;
-  height: 30px;  
-}
-
-.comment-group {
-  padding-top: 5px;
-  font-size: 14px;
-  margin: 0 10px;
-  .media {
-    padding: 5px 0;
-    .media-body {
-      padding-left: 10px;
-    }
+  .content {
+    // height: 100px;
+    overflow: hidden;  
   }
 }
 
-.comment-input {
+/* post index list button */
+
+// .post-information {
+//   padding: 10px 30px 5px; //위 좌우 아래
+//   font-size: 14px;
+// }
+
+/* posts index list comment */
+
+.post-comment {
   padding-top: 5px;
   padding-bottom: 15px;
-  .row {
-    padding: 0 10px;
+  font-size: 14px;
+  margin: 0 10px; //상하 좌우
+  
+  .user-photo {
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+  }
+
+  .media {
+    padding: 5px 0;
+    .media-body {
+      padding: 0 10px;
+    }
+  }
+  .comment-input {
+    padding: 5px 0;
+    .row {
+      padding: 0 15px;
+      .input-group .form-control {
+        border-radius: 0.25rem;
+      }
+    }
   }
 }
 
