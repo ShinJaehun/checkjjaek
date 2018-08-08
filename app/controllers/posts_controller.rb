@@ -52,7 +52,9 @@ class PostsController < ApplicationController
         # 네이버 책 검색 API를 통해 @items 받아오기(hash 형태)
         url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=10&start=1"
         uri = URI.encode(url)
-        res = RestClient.get(uri, headers={ 'X-Naver-Client-Id' => 'GCDuCNDURZvBzhGoo7iL', 'X-Naver-Client-Secret' => '_MpznoTrPe' })
+        res = RestClient.get(uri, headers={ 
+          'X-Naver-Client-Id' => Rails.application.credentials.naver[:client_id],
+          'X-Naver-Client-Secret' => Rails.application.credentials.naver[:client_secret]})
           
         unitokor = eval(res)
           
