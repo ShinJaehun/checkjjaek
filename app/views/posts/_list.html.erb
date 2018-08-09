@@ -5,7 +5,8 @@
     <!--포스트 내용-->
     <div class="media post-content">
       <!--책 이미지-->
-      <%= image_tag "http://#{post.book.image}", class: "border mx-3", width:'150px' %>
+      <%= link_to image_tag("http://#{post.book.image}", class: "border mx-3", width:'150px'), post.book %>
+      <%#= image_tag "http://#{post.book.image}", class: "border mx-3", width:'150px' %>
 
       <div class="media-body">
         <!--책 제목-->
@@ -49,10 +50,10 @@
     <div class="post-comment">
       <% post.comments.each do |c| %>
         <div class="media">
-          <%= image_tag avatar_url(c.user), class: "rounded-circle user-photo" %>
+          <%= link_to image_tag(avatar_url(c.user), class: "rounded-circle user-photo"), c.user %>
             <div class="media-body">
               <div class="panel-heading">
-                <strong><%= c.user.name %></strong> <span class="text-muted"><%= "#{time_ago_in_words(c.created_at)} 전" %> </span>
+                <strong><%= link_to c.user.name, c.user%></strong>님 <span class="text-muted"><%= "#{time_ago_in_words(c.created_at)} 전" %> </span>
               </div>
               <div class="panel-body">
                 <%= c.content %> 

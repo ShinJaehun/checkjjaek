@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   #해쉬태그 관련
   get '/posts/hashtag/:name', to: 'posts#hashtags'
   
+  # 특정 책과 관련된 post 보여주기
   get '/books/:id', to: 'books#show', as: 'book'
 end

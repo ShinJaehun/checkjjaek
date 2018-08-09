@@ -1,17 +1,31 @@
 <div class="row py-2">
 
   <div class="col-md-4 order-md-2 md-4 text-center">
-    <!-- current_user가 표시되어야 하는가 아니면 글을 작성한 user가 표시되어야 하는가?-->
-    <div class="card my-4" style="width: 18rem;">
-      <div class="profile-image">
-        <!--gravatar image를 profile 이미지로 사용하기-->
+    <div class="card my-4 book-info" style="width: 18rem;">
+      <div class="book-image">
+        <!--book image-->
         <%= image_tag "HTTP://#{@book.image}", class: "border mx-3", width: "150px" %>  
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= @book.title %></h5>
+      <div class="book-detail">
+        <h6 class="card-title mb-2"><%= @book.title %></h6>
+        <div class="card-subtitle mb-2 text-muted"><%= @book.author %></div>
       </div>
     </div>
 
+    <div class="card my-4 book-reader" style="width: 18rem;">
+      <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
+      <div class="card-body">
+        <div class="title">이 책에 대해 글을 남겼습니다.</div>
+        <div class="reader-list">
+          <% @posts.each do |post| %>
+            <!--이미지 태그에 링크를(class를 image_tag() 외부에 지정하면 a의 class에 적용이 된다-->
+            <%= link_to image_tag(avatar_url(post.user), class: "rounded-circle user-photo"), post.user %>
+            <!--이미지 태그만-->
+            <%#= image_tag avatar_url(post.user), class: "rounded-circle user-photo" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-8 order-md-1">

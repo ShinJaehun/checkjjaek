@@ -33,10 +33,7 @@
             <%= link_to( content_tag(:i, "",class: ["fas", "fa-edit"]), edit_post_path(post) )%>
             <%= link_to( content_tag(:i, "",class: ["far", "fa-times-circle"]), post_path(post), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } )%>
           <% end %>
-          
-          <!--홈으로 가기 버튼-->
-          <%= link_to( content_tag(:i, "",class: ["fas", "fa-home"]), root_path )%>
-  
+
         </div>
         
         <!-- 해시태그를 처리한 본문 -->

@@ -187,8 +187,35 @@ footer {
   // }
 
 
+/* book show */
 
+.book-info{
+  font-size:14px;
 
+  .book-image {
+    padding-top: 15px;
+    padding-bottom: 5px;
+  }
+  .book-detail{
+    padding: 10px 10px 5px;
+  }
+}
+
+.book-reader {
+  .title {
+    font-size: 14px;
+    padding-bottom: 10px;
+  }
+  .reader-list{
+    text-align: left;
+    .user-photo {
+      padding: 0px;
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+    }
+  }
+}
 
 /* miscellaneous */
 
