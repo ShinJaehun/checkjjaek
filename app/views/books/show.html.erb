@@ -1,0 +1,22 @@
+<div class="row py-2">
+
+  <div class="col-md-4 order-md-2 md-4 text-center">
+    <!-- current_user가 표시되어야 하는가 아니면 글을 작성한 user가 표시되어야 하는가?-->
+    <div class="card my-4" style="width: 18rem;">
+      <div class="profile-image">
+        <!--gravatar image를 profile 이미지로 사용하기-->
+        <%= image_tag "HTTP://#{@book.image}", class: "border mx-3", width: "150px" %>  
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= @book.title %></h5>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-8 order-md-1">
+    <%= render 'post_list' %>
+  </div>
+
+</div>
+
