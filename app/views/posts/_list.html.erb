@@ -5,8 +5,7 @@
     <!--포스트 내용-->
     <div class="media post-content">
       <!--책 이미지-->
-      <%= link_to image_tag("http://#{post.book.image}", class: "border mx-3", width:'150px'), post.book %>
-      <%#= image_tag "http://#{post.book.image}", class: "border mx-3", width:'150px' %>
+      <%= link_to image_tag("#{post.book.image}", class: "border mx-3", width:'150px'), post.book %>
 
       <div class="media-body">
         <!--책 제목-->

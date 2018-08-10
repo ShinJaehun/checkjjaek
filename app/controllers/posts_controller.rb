@@ -78,8 +78,16 @@ class PostsController < ApplicationController
     
       # image 같은 경우는 URL을 저장해야 하기 때문에...
       url = params[:image]
-      image_path = URI.parse(url).host + URI.parse(params[:image]).path
-
+      
+      #image_path = URI.parse(url).host + URI.parse(params[:image]).path
+      # 이미지 경로 : bookthumb-phinf.pstatic.net/cover/001/559/00155992.jpg
+      #image_path = url.gsub(/\?.*/, '')
+      # 이미지 경로 : https://bookthumb-phinf.pstatic.net/cover/001/559/00155992.jpg
+      # 준우 샘이 경로는 이렇게 full URL 형식으로 놔두는 편이 낫다고...
+      # API가 제공하는 책 썸네일은 https인데 불러오지 못함...(인증서 관련)
+      # 그래서 경로 앞에 http://만 붙이도록 함
+      image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
+      
       # book instance를 DB에 저장
       @book = Book.create(
         # 책 제목에 &가 있으면 &amp;가 붙어 저장되는 버그를 해결 
