@@ -32,4 +32,11 @@
   <% else %>
     <!--검색어를 입력해주세요.-->
   <% end %>
+  
+<%= link_to 'more', search_path(
+                    keyword_book: @keyword_book,
+                    start_value: @start_value), class: "btn btn-primary" %>
+
+
+
 
