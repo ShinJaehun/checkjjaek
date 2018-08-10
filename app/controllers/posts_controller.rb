@@ -50,7 +50,7 @@ class PostsController < ApplicationController
       # 검색어가 있다면...
       if @keyword_book.present?
         # 네이버 책 검색 API를 통해 @items 받아오기(hash 형태)
-        url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=10&start=1"
+        url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=100&start=1"
         uri = URI.encode(url)
         res = RestClient.get(uri, headers={ 
           'X-Naver-Client-Id' => Rails.application.credentials.naver[:client_id],
@@ -86,7 +86,11 @@ class PostsController < ApplicationController
       # 준우 샘이 경로는 이렇게 full URL 형식으로 놔두는 편이 낫다고...
       # API가 제공하는 책 썸네일은 https인데 불러오지 못함...(인증서 관련)
       # 그래서 경로 앞에 http://만 붙이도록 함
-      image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
+      unless url.to_s.empty?
+        image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
+      else
+        image_path = nil  
+      end
       
       # book instance를 DB에 저장
       @book = Book.create(
@@ -147,7 +151,8 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

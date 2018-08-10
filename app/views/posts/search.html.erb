@@ -20,7 +20,7 @@
                   publisher: strip_tags(item['publisher'])) %>
             </td>
             <td>
-              <%= image_tag strip_tags(item['image']) %>
+              <%= image_tag book_thumbnail(strip_tags(item['image'])), class: "border mx-3", width:'80px' %>
             </td>
             <td>
               <%= item['author'].html_safe %>

@@ -4,7 +4,7 @@
     
     <div class="media post-content">
       <!--책 이미지-->
-      <%= image_tag "#{post.book.image}", class: "border mx-3", width:'150px' %>
+      <%= image_tag book_thumbnail(post.book.image), class: "border mx-3", width:'150px' %>
   
       <!--포스트 내용-->
       <div class="media-body">
