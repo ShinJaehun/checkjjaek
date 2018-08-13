@@ -1,3 +1,7 @@
+<% if @page_status == 2 %>
+  <h1>검색어를 입력하세요.</h1>
+<% else %>
+  
   <% if @items.present? %>
     <h4><b class="text-warning"><%= @keyword_book %></b>에 대한 검색결과입니다.</a></h4>
     <table class="table table-hover table-striped">
@@ -15,15 +19,15 @@
                 new_post_path(
                   title: strip_tags(item['title']),
                   isbn: strip_tags(item['isbn']),
-                  author: strip_tags(item['author']),
-                  image: strip_tags(item['image']),
+                  author: strip_tags(item['authors'].join(",")),
+                  image: strip_tags(item['thumbnail']),
                   publisher: strip_tags(item['publisher'])) %>
             </td>
             <td>
-              <%= image_tag book_thumbnail(strip_tags(item['image'])), class: "border mx-3", width:'80px' %>
+              <%= image_tag book_thumbnail_search(strip_tags(item['thumbnail'])), class: "border mx-3", width:'80px' %>
             </td>
             <td>
-              <%= item['author'].html_safe %>
+              <%= item['authors'].join(",").html_safe %>
             </td>
           </tr>
         <% end %>
@@ -32,11 +36,23 @@
   <% else %>
     <!--검색어를 입력해주세요.-->
   <% end %>
+
+  <% unless @page_status == 3 %>
   
-<%= link_to 'more', search_path(
-                    keyword_book: @keyword_book,
-                    start_value: @start_value), class: "btn btn-primary" %>
+  <%= link_to 'more', search_path(
+                      keyword_book: @keyword_book,
+                      page: @page), class: "btn btn-primary" %>
+  
+  <% else %>
+    <h1>마지막 페이지입니다.</h1>
+  <% end %>
+    
+  <%#= link_to 'more', search_path(
+                      keyword_book: @keyword_book,
+                      start_value: @start_value), class: "btn btn-primary" %>
 
 
+<% end %>
+  
 
 

@@ -7,7 +7,7 @@ User.find(1).roles.clear
 User.find(1).add_role(:admin)
 
 Book.create!(title: "양철북 1 (세계문학전집 32,1999년 노벨문학상 수상작)",
-             image: "http://bookthumb.phinf.naver.net/cover/000/051/00005174.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788937460326?moddttm=20180801213635",
              isbn: "8937460327 9788937460326",
              publisher: "민음사",
              author: "귄터 그라스")
@@ -17,7 +17,7 @@ Post.create!(content: "세상에서 가장 훌륭한 문학책입니다. #귄터
              book_id: 1)
              
 Book.create!(title: "로마인 이야기 1 (로마는 하루아침에 이루어지지 않았다)",
-             image: "http://bookthumb.phinf.naver.net/cover/001/201/00120146.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788935610242?moddttm=20180801213635",
              isbn: "8935610240 9788935610242",
              publisher: "한길사",
              author: "시오노 나나미")
@@ -27,7 +27,7 @@ Post.create!(content: "누군가 제대하면 남겨놓은 이 책을 관물대 
              book_id: 2)
 
 Book.create!(title: "깊이에의 강요",
-             image: "http://bookthumb.phinf.naver.net/cover/002/029/00202901.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788932902777?moddttm=20180801213635",
              isbn: "8932902771 9788932902777",
              publisher: "열린책들",
              author: "파트리크 쥐스킨트")
@@ -37,7 +37,7 @@ Post.create!(content: "어설픈 어른이 동화랑, 시답잖은 희곡에 실
              book_id: 3)
 
 Book.create!(title: "하얀 전쟁",
-             image: "http://bookthumb.phinf.naver.net/cover/061/093/06109347.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788992280518?moddttm=20180727080936",
              isbn: "8992280513 9788992280518",
              publisher: "세경",
              author: "안정효")
@@ -47,7 +47,7 @@ Post.create!(content: "절판이후 다시 출간된다는 소식을 들었을 �
              book_id: 4)
 
 Book.create!(title: "나의 문화유산답사기 7 (돌하르방 어디 감수광)",
-             image: "http://bookthumb.phinf.naver.net/cover/069/946/06994663.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788936472184?moddttm=20180804074608",
              isbn: "8936472186 9788936472184",
              publisher: "창비",
              author: "유홍준")
@@ -57,7 +57,7 @@ Post.create!(content: "아니오! 존경하는 선생님, 제주도 만큼은 �
              book_id: 5)
 
 Book.create!(title: "조엘 온 소프트웨어 (유쾌한 오프라인 블로그)",
-             image: "http://bookthumb.phinf.naver.net/cover/015/287/01528741.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788989975588?moddttm=20180729075417",
              isbn: "8989975581 9788989975588",
              publisher: "에이콘출판",
              author: "조엘 스폴스키")
@@ -67,7 +67,7 @@ Post.create!(content: "이미 다른 서평들을 비롯한 이 책에 쏟아진
              book_id: 6)
 
 Book.create!(title: "광기의 산맥에서 (러브크래프트 코드 4)",
-             image: "http://bookthumb.phinf.naver.net/cover/018/760/01876092.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788949703305?moddttm=20180406144553",
              isbn: "8949703300 9788949703305",
              publisher: "동서문화사",
              author: "러브크래프트")
@@ -77,7 +77,7 @@ Post.create!(content: "2009년에 황금가지에서 나온 책을 구입했어�
              book_id: 7)
 
 Book.create!(title: "미래를 만든 GEEKS",
-             image: "http://bookthumb.phinf.naver.net/cover/062/705/06270575.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788991268739?moddttm=20180731073055",
              isbn: "8991268730 9788991268739",
              publisher: "인사이트",
              author: "앤디 허츠펠드")
@@ -87,7 +87,7 @@ Post.create!(content: "매일 조금씩 책을 덮을 때의 느낌을 감히 �
              book_id: 8)
 
 Book.create!(title: "C언어 펀더멘탈",
-             image: "http://bookthumb.phinf.naver.net/cover/045/494/04549448.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788979145830?moddttm=20180427194554",
              isbn: "8979145837 9788979145830",
              publisher: "한빛미디어",
              author: "전웅")
@@ -97,7 +97,7 @@ Post.create!(content: "입만 살아있는 전문가들을 압도하는 컴퓨�
              book_id: 9)
 
 Book.create!(title: "C 프로그래머를 위한 C++",
-             image: "http://bookthumb.phinf.naver.net/cover/000/533/00053397.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788979140828?moddttm=20180427194554",
              isbn: "8979140827 9788979140828",
              publisher: "한빛미디어",
              author: "그레고리 새터")
@@ -112,7 +112,7 @@ User.create!(name:  "신해우",
              password_confirmation: "tlsgodn")
 
 Book.create!(title: "마당을 나온 암탉",
-             image: "http://bookthumb.phinf.naver.net/cover/001/597/00159722.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788971968710?moddttm=20180807084348",
              isbn: "8971968710 9788971968710",
              publisher: "사계절",
              author: "황선미")
@@ -122,7 +122,7 @@ Post.create!(content: "교과서에도 실리고 애니메이션으로도 만들
              book_id: 11)
 
 Book.create!(title: "새로 만든 먼나라 이웃나라 6 (온 가족이 함께 떠나는 가장 유익하고 재미있는 세계 역사문화 여행, 이탈리아)",
-             image: "http://bookthumb.phinf.naver.net/cover/069/624/06962481.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788934958246?moddttm=20180807084348",
              isbn: "8934958243 9788934958246",
              publisher: "김영사",
              author: "이원복")
@@ -141,7 +141,7 @@ Post.create!(content: "신재훈 선생님이 추천해주신 책! 나도 이 �
              book_id: 1)
 
 Book.create!(title: "뒤집어지는 영어 (영화로 배우는 영어)",
-             image: "http://bookthumb.phinf.naver.net/cover/030/860/03086097.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9788992280150?moddttm=20180528192638",
              isbn: "8992280157 9788992280150",
              publisher: "세경",
              author: "안정효")
@@ -156,10 +156,10 @@ User.create!(name:  "최다영",
              password_confirmation: "chlekdud")
 
 Book.create!(title: "인조이 프라하 (2018,여행을 즐기는 가장 빠른 방법)",
-             image: "http://bookthumb.phinf.naver.net/cover/137/184/13718492.jpg",
+             image: "http://t1.daumcdn.net/book/KOR9791161653921?moddttm=20180807091242",
              isbn: "1161653929 9791161653921",
              publisher: "넥서스BOOKS",
-             author: "문은정|김지선")
+             author: "문은정,김지선")
 
 Post.create!(content: "프라하 겨울에 다녀왔는데 너무 좋았어요! #여행 #프라하 #프라하여행",
              user_id: 4,

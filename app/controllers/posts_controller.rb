@@ -47,32 +47,43 @@ class PostsController < ApplicationController
     if params.has_key?(:keyword_book)
       @keyword_book = params[:keyword_book]
       
+      @page_status = 0 # 검색중
+      
       # 검색어가 있다면...
       if @keyword_book.present?
 
         # 검색할 자료가 1,000 건이 넘어가는 경우에 대해
         # 일단 more 버튼을 만들어서 지속적으로 API에 조회하도록 했는데... 
         # 이렇게 하는게 맞는 건지는 모르겠다.(버그 같은게 있을지도 모르겠어...)
-        @display_value = 100 # 한 화면에 표시할 검색어 개수
+        @size = 50 # 한 화면에 표시할 검색 결과의 수
 
-        if params[:start_value].to_s.empty?
-          # 시작 위치가 정해져 있지 않으면 기본적으로 1부터 시작
-          @start_value = 1
+        if params[:page].to_s.empty?
+          # 시작 위치가 정해져 있지 않으면 기본적으로 쳇 페이지 보여주기
+          @page = 1
         else
-          # 시작 위치가 설정되어 있으면 해당 값에 100을 더해 100건 이후의 자료 조회하기
-          @start_value = params[:start_value].to_i + 100
-          if @start_value > 1000 # 이에 대한 처리가 필요함(시작 위치의 최대 값은 1,000)
-            @start_value = 900 # 일단 임시로 1,000 번째로 시작하는 자료만 보여줌
+          if @total_count.nil?
+            @total_count = 1000
           end
+          
+          # 시작 위치가 설정되어 있으면 다음 페이지로
+          @page = params[:page].to_i + 1
+
         end
         
         # 네이버 책 검색 API를 통해 @items 받아오기(hash 형태)
         # url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=100&start=1"
-        url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=" + @display_value.to_s + "&start=" + @start_value.to_s
+        # url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=" + @display_value.to_s + "&start=" + @start_value.to_s
+        # uri = URI.encode(url)
+        # res = RestClient.get(uri, headers={ 
+        #   'X-Naver-Client-Id' => Rails.application.credentials.naver[:client_id],
+        #   'X-Naver-Client-Secret' => Rails.application.credentials.naver[:client_secret]})
+        
+        url = "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @page.to_s 
+        # "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @page.to_s 
+        
         uri = URI.encode(url)
-        res = RestClient.get(uri, headers={ 
-          'X-Naver-Client-Id' => Rails.application.credentials.naver[:client_id],
-          'X-Naver-Client-Secret' => Rails.application.credentials.naver[:client_secret]})
+        res = RestClient.get(uri, headers={
+          'Authorization' => Rails.application.credentials.kakao[:authorization_key]})
           
         unitokor = eval(res)
           
@@ -81,12 +92,27 @@ class PostsController < ApplicationController
         json_g = JSON.generate(unitokor)
         hash = JSON.parse(json_g)
           
-        @items = hash['items']
+        # @items = hash['items']
+        @total_count = hash['meta']['total_count']
+        
+        puts "############################################################"
+        puts @total_count
+        puts "현재 페이지 : " + @page.to_s + " 출력 건수 : " + @size.to_s + "  page * size : " + (@page * @size).to_s 
+        
+        if @page * @size > @total_count # 이에 대한 처리가 필요함(시작 위치의 최대 값은 1,000)
+          @page_status = 3 # 마지막 페이지
+        end
+
+        @items = hash['documents']
+            
+      else
+        @page_status = 2 # 검색어 비었음
       end
-    
     end
+  
     # 검색어가 없으면 items에 빈 array 넘기기
     @items ||= []
+    
   end
 
   # GET /posts/new
@@ -105,7 +131,8 @@ class PostsController < ApplicationController
       # API가 제공하는 책 썸네일은 https인데 불러오지 못함...(인증서 관련)
       # 그래서 경로 앞에 http://만 붙이도록 함
       unless url.to_s.empty?
-        image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
+        # image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
+        image_path = URI.unescape(url.match(/http%.+/).to_s)
       else
         image_path = nil  
       end
