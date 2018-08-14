@@ -38,8 +38,22 @@
   <% end %>
 
 
-  <% 1.upto(@max_index) do |p| %>
-    <%= link_to p, search_path(keyword_book: @keyword_book, page: p) %> |  
+  <% if @current_page > 3  %>
+    <%= link_to 1, search_path(keyword_book: @keyword_book, page: 1) %> |
+    <%= link_to '...', search_path(keyword_book: @keyword_book, page: @start_index - 1) %> |
+  <% end %>
+
+  <% @start_index.upto(@end_index) do |p| %>
+    <% if p == @current_page %>
+      <%= link_to "(#{p})", search_path(keyword_book: @keyword_book, page: p) %> |  
+    <% else %>
+      <%= link_to p, search_path(keyword_book: @keyword_book, page: p) %> |  
+    <% end %>
+  <% end %>
+  
+  <% if @current_page < @max_index - 2 %>
+    <%= link_to '...', search_path(keyword_book: @keyword_book, page: @end_index + 1) %> |
+    <%= link_to @max_index, search_path(keyword_book: @keyword_book, page: @max_index) %>
   <% end %>
     
   <% unless @page_status == 3 %>

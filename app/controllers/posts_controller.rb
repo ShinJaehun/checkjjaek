@@ -55,7 +55,7 @@ class PostsController < ApplicationController
         # 검색할 자료가 1,000 건이 넘어가는 경우에 대해
         # 일단 more 버튼을 만들어서 지속적으로 API에 조회하도록 했는데... 
         # 이렇게 하는게 맞는 건지는 모르겠다.(버그 같은게 있을지도 모르겠어...)
-        @size = 10 # 한 화면에 표시할 검색 결과의 수
+        @size = 50 # 한 화면에 표시할 검색 결과의 수
 
         if params[:page].to_s.empty?
           # 시작 위치가 정해져 있지 않으면 기본적으로 첫 페이지 보여주기
@@ -68,6 +68,7 @@ class PostsController < ApplicationController
         end
         
         url = "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s 
+        # url = "https://dapi.kakao.com/v2/search/book?target=title&query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s 
         
         uri = URI.encode(url)
         res = RestClient.get(uri, headers={
@@ -87,18 +88,24 @@ class PostsController < ApplicationController
         puts @total_count
         puts "현재 페이지 : " + @current_page.to_s + " 출력 건수 : " + @size.to_s + "  page * size : " + (@current_page * @size).to_s 
         
+        # 마지막 페이지
         @max_index = @total_count / @size + 1
         
-        if @current_page >= 2
+        # start_index와 end_index 값 지정하기
+        if @current_page > 2
           @start_index = @current_page - 2
-          if @current_page <= @max_index - 3
-            @end_index = @current_page + 3 
+          if @current_page <= @max_index - 2
+            @end_index = @current_page + 2 
           else
             @end_index = @max_index
           end
         else
-          @start_index = 0
-          @end_index = 5 - @start_index
+          @start_index = 1
+          if @max_index <= 5
+            @end_index = @max_index
+          else
+            @end_index = 5
+          end
         end
         
         # @start_index = ((@current_page - 1) / 5).to_i * 5
@@ -107,7 +114,8 @@ class PostsController < ApplicationController
         #   @end_index = @max_index
         # end
         
-        puts "현재 페이지 : " + @current_page.to_s + " start_index : " + @start_index.to_s + " end_index : " + @end_index.to_s 
+        puts "현재 페이지 : " + @current_page.to_s + " 마지막 페이지 : " + @max_index.to_s
+        puts "start_index : " + @start_index.to_s + " end_index : " + @end_index.to_s 
         
         if @current_page * @size > @total_count # 이에 대한 처리가 필요함(시작 위치의 최대 값은 1,000)
           @page_status = 3 # 마지막 페이지
