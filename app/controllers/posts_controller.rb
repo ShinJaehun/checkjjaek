@@ -55,31 +55,19 @@ class PostsController < ApplicationController
         # 검색할 자료가 1,000 건이 넘어가는 경우에 대해
         # 일단 more 버튼을 만들어서 지속적으로 API에 조회하도록 했는데... 
         # 이렇게 하는게 맞는 건지는 모르겠다.(버그 같은게 있을지도 모르겠어...)
-        @size = 50 # 한 화면에 표시할 검색 결과의 수
+        @size = 10 # 한 화면에 표시할 검색 결과의 수
 
         if params[:page].to_s.empty?
-          # 시작 위치가 정해져 있지 않으면 기본적으로 쳇 페이지 보여주기
-          @page = 1
+          # 시작 위치가 정해져 있지 않으면 기본적으로 첫 페이지 보여주기
+          @current_page = 1
         else
-          if @total_count.nil?
-            @total_count = 1000
-          end
           
-          # 시작 위치가 설정되어 있으면 다음 페이지로
-          @page = params[:page].to_i + 1
+          # 시작 위치가 설정되어 있으면 해당 페이지로
+          @current_page = params[:page].to_i
 
         end
         
-        # 네이버 책 검색 API를 통해 @items 받아오기(hash 형태)
-        # url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=100&start=1"
-        # url = "https://openapi.naver.com/v1/search/book.json?query=" + @keyword_book + "&display=" + @display_value.to_s + "&start=" + @start_value.to_s
-        # uri = URI.encode(url)
-        # res = RestClient.get(uri, headers={ 
-        #   'X-Naver-Client-Id' => Rails.application.credentials.naver[:client_id],
-        #   'X-Naver-Client-Secret' => Rails.application.credentials.naver[:client_secret]})
-        
-        url = "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @page.to_s 
-        # "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @page.to_s 
+        url = "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s 
         
         uri = URI.encode(url)
         res = RestClient.get(uri, headers={
@@ -97,9 +85,31 @@ class PostsController < ApplicationController
         
         puts "############################################################"
         puts @total_count
-        puts "현재 페이지 : " + @page.to_s + " 출력 건수 : " + @size.to_s + "  page * size : " + (@page * @size).to_s 
+        puts "현재 페이지 : " + @current_page.to_s + " 출력 건수 : " + @size.to_s + "  page * size : " + (@current_page * @size).to_s 
         
-        if @page * @size > @total_count # 이에 대한 처리가 필요함(시작 위치의 최대 값은 1,000)
+        @max_index = @total_count / @size + 1
+        
+        if @current_page >= 2
+          @start_index = @current_page - 2
+          if @current_page <= @max_index - 3
+            @end_index = @current_page + 3 
+          else
+            @end_index = @max_index
+          end
+        else
+          @start_index = 0
+          @end_index = 5 - @start_index
+        end
+        
+        # @start_index = ((@current_page - 1) / 5).to_i * 5
+        # @end_index = @start_index + 5
+        # if @end_index >= @max_index
+        #   @end_index = @max_index
+        # end
+        
+        puts "현재 페이지 : " + @current_page.to_s + " start_index : " + @start_index.to_s + " end_index : " + @end_index.to_s 
+        
+        if @current_page * @size > @total_count # 이에 대한 처리가 필요함(시작 위치의 최대 값은 1,000)
           @page_status = 3 # 마지막 페이지
         end
 
