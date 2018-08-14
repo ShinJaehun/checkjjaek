@@ -91,6 +91,10 @@ footer {
   border-radius: 0.25rem;
 }
 
+.post-list {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .post-content {
   padding-top: 15px;
   padding-bottom: 5px;
@@ -215,6 +219,25 @@ footer {
       vertical-align: middle;
     }
   }
+}
+
+/* search */
+
+.search_result {
+  font-size: 12px;
+  padding: 20px 0 15px 0;
+  margin: 5px;
+  // border-top: 0px;
+  // border-left: 0px;
+  // border-right: 0px;
+  // border-bottom: dotted #666;
+
+  .thumbnail {
+    position: relative;
+    float: left;
+    width: 80px;
+  }
+
 }
 
 /* miscellaneous */

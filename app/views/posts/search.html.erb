@@ -4,40 +4,50 @@
   
   <% if @items.present? %>
     <h4><b class="text-warning"><%= @keyword_book %></b>에 대한 검색결과입니다.</a></h4>
-    <table class="table table-hover table-striped">
-      <thead>
-        <th>제목</th>
-        <th>책표지</th>
-        <th>저자</th>
-      </thead>
-      <tbody>
-        <% @items.each do |item| %>
-          <tr>
-            <td>
-              <%#= link_to item['title'].html_safe, new_post_path, :data => {:title => item['title'], :isbn => item['isbn']} %>
-              <%= link_to item['title'].html_safe, 
-                new_post_path(
-                  title: strip_tags(item['title']),
-                  isbn: strip_tags(item['isbn']),
-                  author: strip_tags(item['authors'].join(",")),
-                  image: strip_tags(item['thumbnail']),
-                  publisher: strip_tags(item['publisher'])) %>
-            </td>
-            <td>
-              <%= image_tag book_thumbnail_search(strip_tags(item['thumbnail'])), class: "border mx-3", width:'80px' %>
-            </td>
-            <td>
-              <%= item['authors'].join(",").html_safe %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <!--검색어를 입력해주세요.-->
+    
+    <% @items.each do |item| %>
+
+      <div class="search_result card">
+        <div class="card-body">
+          
+            <%= image_tag book_thumbnail_search(strip_tags(item['thumbnail'])), class: "thumbnail" %>
+      
+            <div class="info">
+              <div class="title">
+                <%= link_to item['title'].html_safe, 
+                  new_post_path(
+                    title: strip_tags(item['title']),
+                    isbn: strip_tags(item['isbn']),
+                    author: strip_tags(item['authors'].join(",")),
+                    image: strip_tags(item['thumbnail']),
+                    publisher: strip_tags(item['publisher'])) %>
+              </div>
+              <div class="writers">
+                <% if item['authors'].present? %>
+                  <%= item['authors'].join(",").html_safe %><span>저</span>
+                <% end %>
+                <% if item['translators'].present? %>
+                  <%= item['translators'].join(",").html_safe %><span>역</span>
+                <% end %>
+                <% if item['publisher'].present? %>
+                  <%= item['publisher'].html_safe %>
+                <% end %>
+                <% if item['datetime'].present? %>
+                  <%= item['datetime'][0..9] %>
+                <% end %>
+              </div>
+              <div class="contents">
+                <%= item['contents'].html_safe %>
+              </div>
+            </div>
+            
+          </div>
+        
+        </div>
+      
+    <% end %>
   <% end %>
-
-
+    
   <% if @current_page > 3  %>
     <%= link_to 1, search_path(keyword_book: @keyword_book, page: 1) %> |
     <%= link_to '...', search_path(keyword_book: @keyword_book, page: @start_index - 1) %> |
@@ -55,6 +65,16 @@
     <%= link_to '...', search_path(keyword_book: @keyword_book, page: @end_index + 1) %> |
     <%= link_to @max_index, search_path(keyword_book: @keyword_book, page: @max_index) %>
   <% end %>
+  
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
     
   <% unless @page_status == 3 %>
   
