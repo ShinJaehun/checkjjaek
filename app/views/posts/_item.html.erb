@@ -51,7 +51,7 @@
   <div class="post-comment">
     <% @post.comments.each do |c| %>
       <div class="media">
-        <%= link_to image_tag(avatar_url(c.user), class: "rounded-circle user-photo"), c.user %>
+        <%= link_to image_tag(avatar_url(c.user), class: "rounded-circle user-photo", title: c.user.name), c.user %>
           <div class="media-body">
             <div class="panel-heading">
               <strong><%= link_to c.user.name, c.user%></strong>님 <span class="text-muted"><%= "#{time_ago_in_words(c.created_at)} 전" %> </span>

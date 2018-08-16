@@ -156,7 +156,7 @@ User.create!(name:  "최다영",
              password_confirmation: "chlekdud")
 
 Book.create!(title: "인조이 프라하 (2018,여행을 즐기는 가장 빠른 방법)",
-             image: "http://t1.daumcdn.net/book/KOR9791161653921?moddttm=20180807091242",
+             image: "http://t1.daumcdn.net/book/image/KOR9791161653921?moddttm=20180816091022",
              isbn: "1161653929 9791161653921",
              publisher: "넥서스BOOKS",
              author: "문은정,김지선")
