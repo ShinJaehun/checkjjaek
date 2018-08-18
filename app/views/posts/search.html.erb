@@ -1,95 +1,84 @@
 <% if @page_status == 2 %>
   <h1>검색어를 입력하세요.</h1>
+
 <% else %>
   
   <% if @items.present? %>
-    <h4><b class="text-warning"><%= @keyword_book %></b>에 대한 검색결과입니다.</a></h4>
-    
-    <% @items.each do |item| %>
 
-      <div class="search_result card">
-        <div class="card-body">
-          
-            <%= image_tag book_thumbnail_search(strip_tags(item['thumbnail'])), class: "thumbnail" %>
-      
-            <div class="info">
-              <div class="title">
-                <%= link_to item['title'].html_safe, 
-                  new_post_path(
-                    title: strip_tags(item['title']),
-                    isbn: strip_tags(item['isbn']),
-                    author: strip_tags(item['authors'].join(",")),
-                    image: strip_tags(item['thumbnail']),
-                    publisher: strip_tags(item['publisher'])) %>
-              </div>
-              <div class="writers">
-                <% if item['authors'].present? %>
-                  <%= item['authors'].join(",").html_safe %><span>저</span>
-                <% end %>
-                <% if item['translators'].present? %>
-                  <%= item['translators'].join(",").html_safe %><span>역</span>
-                <% end %>
-                <% if item['publisher'].present? %>
-                  <%= item['publisher'].html_safe %>
-                <% end %>
-                <% if item['datetime'].present? %>
-                  <%= item['datetime'][0..9] %>
-                <% end %>
-              </div>
-              <div class="contents">
-                <%= item['contents'].html_safe %>
-              </div>
-            </div>
+    <div class="search-title">
+      <h4><b class="text-warning"><%= @keyword_book %></b>에 대한 검색결과입니다.</a></h4>
+    </div>
+    
+    <div class="search_result">
             
+      <% @items.each do |item| %>
+  
+        <div class="book_item media">
+          <%= image_tag extract_thumbnail110_url(strip_tags(item['thumbnail'])), class: "thumbnail" %>
+  
+          <div class="info media-body">
+            <div class="title">
+              <%= link_to item['title'].html_safe, 
+                new_post_path(
+                  title: strip_tags(item['title']),
+                  isbn: strip_tags(item['isbn']),
+                  author: strip_tags(item['authors'].join(",")),
+                  image: strip_tags(item['thumbnail']),
+                  publisher: strip_tags(item['publisher'])) %>
+            </div>
+            <div class="writers text-muted">
+              <% if item['category'].present? %>
+                <%= item['category'].html_safe %> | 
+              <% end %>
+              <% if item['authors'].present? %>
+                <%= item['authors'].join(",").html_safe %><span>저</span> | 
+              <% end %>
+              <% if item['translators'].present? %>
+                <%= item['translators'].join(",").html_safe %><span>역</span> | 
+              <% end %>
+              <% if item['publisher'].present? %>
+                <%= item['publisher'].html_safe %> | 
+              <% end %>
+              <% if item['datetime'].present? %>
+                <%= item['datetime'][0..9] %>
+              <% end %>
+            </div>
+            <div class="contents">
+              <%= item['contents'].html_safe %>
+            </div>
           </div>
-        
+            
         </div>
-      
-    <% end %>
-  <% end %>
-    
-  <% if @current_page > 3  %>
-    <%= link_to 1, search_path(keyword_book: @keyword_book, page: 1) %> |
-    <%= link_to '...', search_path(keyword_book: @keyword_book, page: @start_index - 1) %> |
-  <% end %>
+          
+      <% end %>
 
-  <% @start_index.upto(@end_index) do |p| %>
-    <% if p == @current_page %>
-      <%= link_to "(#{p})", search_path(keyword_book: @keyword_book, page: p) %> |  
-    <% else %>
-      <%= link_to p, search_path(keyword_book: @keyword_book, page: p) %> |  
-    <% end %>
+    </div>
+
   <% end %>
   
-  <% if @current_page < @max_index - 2 %>
-    <%= link_to '...', search_path(keyword_book: @keyword_book, page: @end_index + 1) %> |
-    <%= link_to @max_index, search_path(keyword_book: @keyword_book, page: @max_index) %>
-  <% end %>
-  
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
-    
-  <% unless @page_status == 3 %>
-  
-  <%#= link_to 'more', search_path(
-                      keyword_book: @keyword_book,
-                      page: @page), class: "btn btn-primary" %>
-
-  <% else %>
-    <h1>마지막 페이지입니다.</h1>
-  <% end %>
-    
-  <%#= link_to 'more', search_path(
-                      keyword_book: @keyword_book,
-                      start_value: @start_value), class: "btn btn-primary" %>
-
+  <div class="search-result-pagination">
+    <nav aria-label="Page navigation">
+    <!--pagination 처리 : 걍 의식의 흐름대로 코딩했는데... 나중에 어떤 오류가 발생할지 장담할 수 없음-->
+      <ul class="pagination justify-content-center">
+        <% if @current_page > 3  %>
+          <li class="page-item"><%= link_to 1, search_path(keyword_book: @keyword_book, page: 1), class: "page-link" %></li>
+          <li class="page-item"><%= link_to '...', search_path(keyword_book: @keyword_book, page: @start_index - 1), class: "page-link" %></li>
+        <% end %>
+        <% @start_index.upto(@end_index) do |p| %>
+          <% if p == @current_page %>
+            <li class="page-item active"><%= link_to "#{p}", search_path(keyword_book: @keyword_book, page: p), class: "page-link" %></li>
+          <% else %>
+            <li class="page-item"><%= link_to p, search_path(keyword_book: @keyword_book, page: p), class: "page-link" %></li>
+          <% end %>
+        <% end %>
+        
+        <% if @current_page < @max_index - 2 %>
+          <li class="page-item"><%= link_to '...', search_path(keyword_book: @keyword_book, page: @end_index + 1), class: "page-link" %></li>
+          <li class="page-item"><%= link_to @max_index, search_path(keyword_book: @keyword_book, page: @max_index), class: "page-link" %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
 
 <% end %>
   

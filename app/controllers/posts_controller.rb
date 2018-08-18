@@ -52,9 +52,6 @@ class PostsController < ApplicationController
       # 검색어가 있다면...
       if @keyword_book.present?
 
-        # 검색할 자료가 1,000 건이 넘어가는 경우에 대해
-        # 일단 more 버튼을 만들어서 지속적으로 API에 조회하도록 했는데... 
-        # 이렇게 하는게 맞는 건지는 모르겠다.(버그 같은게 있을지도 모르겠어...)
         @size = 50 # 한 화면에 표시할 검색 결과의 수
 
         if params[:page].to_s.empty?
@@ -84,9 +81,9 @@ class PostsController < ApplicationController
         # @items = hash['items']
         @total_count = hash['meta']['total_count']
         
-        puts "############################################################"
-        puts @total_count
-        puts "현재 페이지 : " + @current_page.to_s + " 출력 건수 : " + @size.to_s + "  page * size : " + (@current_page * @size).to_s 
+        # puts "############################################################"
+        # puts @total_count
+        # puts "현재 페이지 : " + @current_page.to_s + " 출력 건수 : " + @size.to_s + "  page * size : " + (@current_page * @size).to_s 
         
         # 마지막 페이지
         @max_index = @total_count / @size + 1
@@ -108,19 +105,9 @@ class PostsController < ApplicationController
           end
         end
         
-        # @start_index = ((@current_page - 1) / 5).to_i * 5
-        # @end_index = @start_index + 5
-        # if @end_index >= @max_index
-        #   @end_index = @max_index
-        # end
+        # puts "현재 페이지 : " + @current_page.to_s + " 마지막 페이지 : " + @max_index.to_s
+        # puts "start_index : " + @start_index.to_s + " end_index : " + @end_index.to_s 
         
-        puts "현재 페이지 : " + @current_page.to_s + " 마지막 페이지 : " + @max_index.to_s
-        puts "start_index : " + @start_index.to_s + " end_index : " + @end_index.to_s 
-        
-        if @current_page * @size > @total_count # 이에 대한 처리가 필요함(시작 위치의 최대 값은 1,000)
-          @page_status = 3 # 마지막 페이지
-        end
-
         @items = hash['documents']
             
       else

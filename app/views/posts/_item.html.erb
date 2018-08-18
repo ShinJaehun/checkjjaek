@@ -23,8 +23,7 @@
         <% end %>
 
         <% if @post.like_users.count > 0 %>
-          <i class="fas fa-times"></i>
-          <%= @post.like_users.count %>
+          <span class="badge badge-primary badge-pill"><%= @post.like_users.count %></span>
         <% end %>
         
         <!--수정, 삭제 버튼-->

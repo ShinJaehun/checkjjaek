@@ -25,32 +25,41 @@
         
       </div>
     </div>
+  
+    <% if @user.followees.count > 0 %>
     
-    <div class="card my-4 book-reader" style="width: 18rem;">
-      <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
-      <div class="card-body">
-        <div class="title"><%= @user.name %>님이 구독하는 책짹</div>
-        <div class="reader-list">
-          <% @user.followees.each do |f| %>
-            <!--이미지 태그에 링크를(class를 image_tag() 외부에 지정하면 a의 class에 적용이 된다-->
-            <%= link_to image_tag(avatar_url(f), class: "rounded-circle user-photo", title: f.name), f %>
-          <% end %>
+      <div class="card my-4 book-reader" style="width: 18rem;">
+        <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
+        <div class="card-body">
+          <div class="title"><%= @user.name %>님이 구독하는 책짹</div>
+          <div class="reader-list">
+            <% @user.followees.each do |f| %>
+              <!--이미지 태그에 링크를(class를 image_tag() 외부에 지정하면 a의 class에 적용이 된다-->
+              <%= link_to image_tag(avatar_url(f), class: "rounded-circle user-photo", title: f.name), f %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
     
-    <div class="card my-4 book-reader" style="width: 18rem;">
-      <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
-      <div class="card-body">
-        <div class="title"><%= @user.name %>님의 책짹을 구독하는 분들</div>
-        <div class="reader-list">
-          <% @user.followers.each do |f| %>
-            <!--이미지 태그에 링크를(class를 image_tag() 외부에 지정하면 a의 class에 적용이 된다-->
-            <%= link_to image_tag(avatar_url(f), class: "rounded-circle user-photo", title: f.name), f %>
-          <% end %>
+    <% end %>
+    
+    <% if @user.followers.count > 0 %>
+    
+      <div class="card my-4 book-reader" style="width: 18rem;">
+        <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
+        <div class="card-body">
+          <div class="title"><%= @user.name %>님의 책짹을 구독하는 분들</div>
+          <div class="reader-list">
+            <% @user.followers.each do |f| %>
+              <!--이미지 태그에 링크를(class를 image_tag() 외부에 지정하면 a의 class에 적용이 된다-->
+              <%= link_to image_tag(avatar_url(f), class: "rounded-circle user-photo", title: f.name), f %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+
+    <% end %>
+
   </div>
   
   <div class="col-md-8 order-md-1">
