@@ -17,8 +17,10 @@
         
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><%= link_to current_user.name, current_user, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to '정보수정', edit_user_registration_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: "nav-link" %></li>
         </ul>
+        
         <!-- 책짹 검색하기  -->
         <div class="mr-sm-5">
           <%= form_tag posts_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
