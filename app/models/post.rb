@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # Post와 User의 likes를 통한 N:N 관계
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
   
   # @post.toggle_like(current_user)
