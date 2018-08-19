@@ -28,7 +28,7 @@
     <div class="search-book">
       <!--게시글 등록하기-->      
       <%= form_tag search_path, method: :get, class: "input-group mt-4" do %>
-        <%= text_field_tag :keyword_book, params[:keyword_book], require: true, class: "form-control", placeholder: "무슨 책을 읽었나요?" %>
+        <%= text_field_tag :keyword_book, params[:keyword_book], require: true, class: "form-control search-book-input", placeholder: "무슨 책을 읽었나요?" %>
         <div class="input-group-btn">
           <%= submit_tag '책 찾기', class: "btn btn-outline-secondary" %>
         </div>

@@ -13,6 +13,21 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    // background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+}
+
+.btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
 a {
   color: black;
   font-weight: bold;
@@ -32,11 +47,135 @@ textarea {
 /* header */
 
 
+/* sign in */
+
+.card-container {
+    max-width: 350px;
+    padding: 40px 40px;
+    // background-color: #F7F7F7;
+    /* just in case there no content*/
+    margin: 0 auto 25px;
+    margin-top: 10px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    // width: 96px;
+    // height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+/*
+ * Form styles
+ */
+// .profile-name-card {
+//     font-size: 16px;
+//     font-weight: bold;
+//     text-align: center;
+//     margin: 10px 0 0;
+//     min-height: 1em;
+// }
+
+// .reauth-email {
+//     display: block;
+//     color: #404040;
+//     line-height: 2;
+//     margin-bottom: 10px;
+//     font-size: 14px;
+//     text-align: center;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     white-space: nowrap;
+//     -moz-box-sizing: border-box;
+//     -webkit-box-sizing: border-box;
+//     box-sizing: border-box;
+// }
+
+.form-user-info label {
+  margin-bottom: 0.2rem;
+}
+
+.form-user-info #inputName,
+.form-user-info #inputEmail,
+.form-user-info #inputPassword,
+.form-user-info #inputPasswordConfirmation,
+.form-user-info #inputCurrentPassword {
+    direction: ltr;
+    height: 44px;
+    font-size: 16px;
+    
+    margin-bottom: 20px;
+    border-radius: 0.25rem;
+}
+
+.form-user-info input[type=email],
+.form-user-info input[type=password],
+.form-user-info input[type=text],
+.form-user-info button {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-user-info .form-control:focus {
+    border-color: rgb(104, 145, 162);
+    outline: 0;
+    -webkit-box-sborhadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+}
+
+.btn.btn-signin {
+    /*background-color: #4d90fe; */
+    // background-color: rgb(104, 145, 162);
+    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    // border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s;
+}
+
+// .btn.btn-signin:hover,
+// .btn.btn-signin:active,
+// .btn.btn-signin:focus {
+//     // background-color: rgb(12, 97, 33);
+// }
+
+// .forgot-password {
+//     color: rgb(104, 145, 162);
+// }
+
+// .forgot-password:hover,
+// .forgot-password:active,
+// .forgot-password:focus{
+//     color: rgb(12, 97, 33);
+// }
+
 
 /* navbar */
 
 .navbar-custom {
   background-color: #FF8000; // height:80px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 
   .navbar-brand img {
     width: 60px;
@@ -47,23 +186,23 @@ textarea {
     color: rgba(255, 255, 255, .8);
   }
 
-  /* change the link color */
-  .navbar-nav {
-    color: rgba(255, 255, 255, .5);
-    
+  .navbar-collapse {
     .user-photo {
       padding: 0px;
       width: 30px;
       height: 30px;
     }
-    
+  }
+
+  /* change the link color */
+  .navbar-nav {
+    color: rgba(255, 255, 255, .5);
+
     /* change the color of active or hovered links */
     .nav-item.active .nav-link, .nav-item:hover .nav-link {
       color: #ffffff;
     }
   }
-  
-
 }
 
 /* footer */
@@ -95,7 +234,8 @@ footer {
 /* posts index list */
 
 // .search-group .input-group .form-control {
-.search-book .input-group .form-control {
+// .search-book .input-group .form-control {
+.search-book .input-group .search-book-input {
   border-radius: 0.25rem;
 }
 
@@ -201,9 +341,9 @@ footer {
   // overflow: hidden;
   
   .book_item {
-  border-bottom: 2px dotted #666; 
-  padding: 20px 0;
-  margin: 0 30px;  
+    border-bottom: 2px dotted #666; 
+    padding: 20px 0;
+    margin: 0 30px;  
     .thumbnail {
       // position: relative;
       float: left;

@@ -1,19 +1,28 @@
-<div class="text-center py-2">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-login py-2"}) do |f| %>
-      <img class="mb-4" src="/assets/logo/logo.png"></img>
-      <div class="row py-2">
-        <%= f.email_field :email, required: false, autofocus: true, id: "inputEmail", class: "form-control py-2", placeholder: "메일 주소" %>
-      </div>
-      <div class="row">
-        <%= f.password_field :password, required: false, id: "inputPassword", class: "form-control py-2", placeholder: "비밀번호" %>
-      </div>
-      <div class="checkbox mb-3 py-4">
+<div class="container">
+  <img class="profile-img-card" src="/assets/logo/logo.png"></img>
+
+  <div class="card card-container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-user-info"}) do |f| %>
+      <!--<form class="form-signin">-->
+      <!--<span id="reauth-email" class="reauth-email"></span>-->
+      <label for="inputEmail">메일주소</label>
+      <%= f.email_field :email, required: true, autofocus: true, id: "inputEmail", class: "form-control"%>
+      <!--<input type="email" id="inputEmail" class="form-control" required autofocus>-->
+      <label for="inputPassword">비밀번호</label>
+      <%= f.password_field :password, required: true, id: "inputPassword", class: "form-control"%>
+      <!--<input type="password" id="inputPassword" class="form-control" required>-->
+      <div id="remember" class="checkbox">
         <label>
           <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>로그인 상태 유지
-          </label>
+            <!--<input type="checkbox" value="remember-me"> 로그인 상태 유지-->
+        </label>
       </div>
-      <button class="btn btn-lg btn-warning btn-block" type="submit">로그인</button>
-  <% end %>
-  
-  <%= render "devise/shared/links" %>
-</div>
+      <!--<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>-->
+      <button class="btn btn-outline-secondary btn-signin" type="submit">로그인</button>
+    
+      <a href="#" class="forgot-password">
+          비밀번호를 잊으셨나요?
+      </a>
+    <% end %>  
+  </div><!-- /card-container -->
+</div><!-- /container -->
