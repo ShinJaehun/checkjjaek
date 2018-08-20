@@ -137,9 +137,9 @@ class PostsController < ApplicationController
       # 그래서 경로 앞에 http://만 붙이도록 함
       unless url.to_s.empty?
         # image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
-        image_path = URI.unescape(url.match(/http%.+/).to_s)
+        thumbnail_path = URI.unescape(url.match(/http%.+/).to_s)
       else
-        image_path = nil  
+        thumbnail_path = nil  
       end
       
       # book instance를 DB에 저장
@@ -147,8 +147,8 @@ class PostsController < ApplicationController
         # 책 제목에 &가 있으면 &amp;가 붙어 저장되는 버그를 해결 
         title: params[:title].gsub(/&amp;/, "&"),
         isbn:  params[:isbn],
-        author:  params[:author],
-        image:  image_path,
+        authors:  params[:authors],
+        thumbnail:  thumbnail_path,
         publisher: params[:publisher]
       )  
     end
