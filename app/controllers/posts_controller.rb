@@ -126,7 +126,7 @@ class PostsController < ApplicationController
     unless @book = Book.find_by(isbn: params[:isbn])
     
       # image 같은 경우는 URL을 저장해야 하기 때문에...
-      url = params[:image]
+      thumbnail_url = params[:thumbnail]
       
       #image_path = URI.parse(url).host + URI.parse(params[:image]).path
       # 이미지 경로 : bookthumb-phinf.pstatic.net/cover/001/559/00155992.jpg
@@ -135,9 +135,12 @@ class PostsController < ApplicationController
       # 준우 샘이 경로는 이렇게 full URL 형식으로 놔두는 편이 낫다고...
       # API가 제공하는 책 썸네일은 https인데 불러오지 못함...(인증서 관련)
       # 그래서 경로 앞에 http://만 붙이도록 함
-      unless url.to_s.empty?
+      unless thumbnail_url.to_s.empty?
         # image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
-        thumbnail_path = URI.unescape(url.match(/http%.+/).to_s)
+        # thumbnail_path = URI.unescape(url.match(/http%.+/).to_s)
+        
+        # thumbnail_path = URI.unescape(thumbnail_url.match(/(http.*)(http.*)/)[2].to_s)
+        thumbnail_path = URI.unescape(thumbnail_url.match(/^http.+?(http.+?)%3F/)[1].to_s)
       else
         thumbnail_path = nil  
       end
@@ -149,7 +152,12 @@ class PostsController < ApplicationController
         isbn:  params[:isbn],
         authors:  params[:authors],
         thumbnail:  thumbnail_path,
-        publisher: params[:publisher]
+        publisher: params[:publisher],
+        contents: params[:contents],
+        url: params[:url],
+        date_time: params[:date_time],
+        translators: params[:translators],
+        category: params[:category]
       )  
     end
     

@@ -24,7 +24,12 @@
                   isbn: strip_tags(item['isbn']),
                   authors: strip_tags(item['authors'].join(",")),
                   thumbnail: strip_tags(item['thumbnail']),
-                  publisher: strip_tags(item['publisher'])) %>
+                  publisher: strip_tags(item['publisher']),
+                  contents:  strip_tags(item['contents']),
+                  url: strip_tags(item['url']),
+                  date_time: strip_tags(item['datetime'][0..9]),
+                  translators: strip_tags(item['translators'].join(",")),
+                  category: strip_tags(item['category'])) %>
             </div>
             <div class="writers text-muted">
               <% if item['category'].present? %>
