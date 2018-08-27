@@ -16,7 +16,11 @@ class PostsController < ApplicationController
   def index
     
     # posts/index의 추천 사용자, 차후에 없애려고 하고 있음...
-    @users = User.all
+    # @users = User.all
+    
+    # user를 posts 수로 정렬하기 위해 posts의 counter cache를 사용하고 있음
+    # @users = User.find(:all, :limit => 10, :order => 'posts_count desc')
+    @users = User.order(:posts_count => :desc).limit(10)
 
     # @posts = Post.all
     # :content 로 내용 검색을 한 경우에...
@@ -149,6 +153,7 @@ class PostsController < ApplicationController
       @book = Book.create(
         # 책 제목에 &가 있으면 &amp;가 붙어 저장되는 버그를 해결 
         # title: params[:title].gsub(/&amp;/, "&"),
+        # 그냥 이렇게 라이브러리를 사용하는게 낫겠지!
         title: CGI.unescapeHTML(params[:title]),
         isbn:  params[:isbn],
         authors:  params[:authors],

@@ -18,7 +18,7 @@
       <div class="card-body">
         <h5 class="card-title">추천 사용자</h5>
           <% @users.each do |u| %>
-            <p class = "card-text" ><%= link_to u.name, u %></p>
+            <p class = "card-text" ><%= link_to u.name, u %><%= u.posts_count %></p>
           <% end %>
       </div>
     </div>

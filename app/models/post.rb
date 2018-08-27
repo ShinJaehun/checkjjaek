@@ -7,7 +7,8 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
 
   # User와 Post의 1:N 관계
-  belongs_to :user
+  # counter_cache는 post 수에 따른 user 리스트를 얻기 위해서
+  belongs_to :user, :counter_cache => :posts_count
 
   # Book과 Post의 1:N 관계
   belongs_to :book
