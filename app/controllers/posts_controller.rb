@@ -148,12 +148,13 @@ class PostsController < ApplicationController
       # book instance를 DB에 저장
       @book = Book.create(
         # 책 제목에 &가 있으면 &amp;가 붙어 저장되는 버그를 해결 
-        title: params[:title].gsub(/&amp;/, "&"),
+        # title: params[:title].gsub(/&amp;/, "&"),
+        title: CGI.unescapeHTML(params[:title]),
         isbn:  params[:isbn],
         authors:  params[:authors],
         thumbnail:  thumbnail_path,
         publisher: params[:publisher],
-        contents: params[:contents],
+        contents: CGI.unescapeHTML(params[:contents]),
         url: params[:url],
         date_time: params[:date_time],
         translators: params[:translators],
