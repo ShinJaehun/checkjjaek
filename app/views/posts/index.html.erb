@@ -13,13 +13,26 @@
       </div>
     </div>
 
-    <div class="card my-4" style="width: 18rem;">
+    <div class="card my-4 suggested-friends" style="width: 18rem;">
       <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
       <div class="card-body">
-        <h5 class="card-title">추천 사용자</h5>
-          <% @users.each do |u| %>
-            <p class = "card-text" ><%= link_to u.name, u %><%= u.posts_count %></p>
-          <% end %>
+        <div class="title">팔로우 추천</div>
+          <div class="suggested-friends-list">
+          
+            <% @users.each do |u| %>
+              <div class="row">
+                <div class="col-md-2 suggested-friend-thumbnail">
+                <%= link_to image_tag(avatar_url(u), class: "rounded-circle user-photo", title: u.name), u %>
+                </div>
+                <div class="col-md-10 suggested-friend-info">
+                  <div class="suggested-friend-info-post-count">
+                    <strong><%= link_to u.name, u%></strong><span class="small-font">님의 책짹</span> <strong><%= u.posts_count %></strong><span class="small-font">개</span>  
+                  </div>
+                </div>
+              </div>  
+            <% end %>
+          </div>
+
       </div>
     </div>
   </div>

@@ -38,6 +38,10 @@ a {
   }
 }
 
+.small-font {
+  font-size: 12px;
+}
+
 textarea {
   height: 100px;
   width: 300px;
@@ -234,8 +238,32 @@ footer {
 
 /* posts index list */
 
-// .search-group .input-group .form-control {
-// .search-book .input-group .form-control {
+.suggested-friends {
+  .title {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
+  .suggested-friends-list{
+    font-size: 14px;
+    text-align: left;
+    .row {
+      margin: 5px 0;
+      
+      .user-photo {
+        padding: 0px;
+        width: 30px;
+        height: 30px;
+      }
+      .suggested-friend-info {
+        .suggested-friend-info-post-count {
+  
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+}
+
 .search-book .input-group .search-book-input {
   border-radius: 0.25rem;
 }
@@ -325,6 +353,7 @@ footer {
   }
   .reader-list{
     text-align: left;
+    line-height: 200%;
     .user-photo {
       padding: 0px;
       width: 30px;
