@@ -8,7 +8,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title"><%= current_user.name %></h5>
-        <div class="row">
+        <div class="row follow-counter">
           <div class="col-md-6", style="text-align: right;">팔로잉 : <%= current_user.followees.count %></div>
           <div class="col-md-6", style="text-align: left;">팔로워 : <%= current_user.followers.count %></div>
         </div>
