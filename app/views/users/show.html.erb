@@ -7,21 +7,21 @@
       </div>
       <div class="card-body">
         <h5 class="card-title"><%= @user.name %>님의 책짹</h5>
-        <p class="card-text">
-          팔로잉 : <%= @user.followees.count %>
-        </p>
-        <p class="card-text">
-          팔로워 : <%= @user.followers.count %>
-        </p>
+        <div class="row">
+          <div class="col-md-6", style="text-align: right;">팔로잉 : <%= current_user.followees.count %></div>
+          <div class="col-md-6", style="text-align: left;">팔로워 : <%= current_user.followers.count %></div>
+        </div>
         
-        <!-- 준우 샘이 도와주신 follow/unfollow 버튼 처리 -->
-        <% if can? :follow, @user %>
-          <% if @user.followers.include?(current_user) %>
-            <%= link_to 'unfollow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
-          <% else %>
-            <%= link_to 'follow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
+        <div class="follow-button", style="margin-top: 15px;">
+          <!-- 준우 샘이 도와주신 follow/unfollow 버튼 처리 -->
+          <% if can? :follow, @user %>
+            <% if @user.followers.include?(current_user) %>
+              <%= link_to 'unfollow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to 'follow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
         
       </div>
     </div>
