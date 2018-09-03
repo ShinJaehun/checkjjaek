@@ -7,10 +7,20 @@
         <%= image_tag avatar_url(current_user), class: "rounded-circle", style: "padding: 30px;" %>  
       </div>
       <div class="card-body">
-        <h5 class="card-title"><%= current_user.name %></h5>
+        <h5 class="card-title"><strong><%= current_user.name %></strong>님</h5>
         <div class="row follow-counter">
-          <div class="col-md-6", style="text-align: right;">팔로잉 : <%= current_user.followees.count %></div>
-          <div class="col-md-6", style="text-align: left;">팔로워 : <%= current_user.followers.count %></div>
+          <div class="col-md-4", style="text-align: center; padding: 0 5px;">
+            <div>책짹</div> 
+            <div><strong><%= current_user.posts_count %></strong></div>
+          </div>  
+          <div class="col-md-4", style="text-align: center; padding: 0 5px;">
+            <div>팔로잉</div>
+            <div><strong><%= current_user.followees.count %></strong></div>
+          </div>
+          <div class="col-md-4", style="text-align: center; <padding></padding>: 0 5px;">
+            <div>팔로워</div>
+            <div><strong><%= current_user.followers.count %></strong></div>
+          </div>
         </div>
       </div>
     </div>
