@@ -238,9 +238,9 @@ class PostsController < ApplicationController
   # GET /posts/hashtag/:name
   def hashtags
     # params로 넘긴 tag를 받아서
-    tag = Tag.find_by(name: params[:name])
+    @tag = Tag.find_by(name: params[:name])
     # 해당 tag를 갖고 있는 posts 찾고 view로 보이기
-    @posts = tag.posts.order(created_at: :desc)
+    @posts = @tag.posts.order(created_at: :desc)
     # 추천 사용자를 표시하기 위해 
     @users = User.all
   end

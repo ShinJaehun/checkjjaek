@@ -15,7 +15,8 @@
     <div class="card my-4 book-reader" style="width: 18rem;">
       <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
       <div class="card-body">
-        <div class="title">이 책에 책짹을 남긴 분들</div>
+        <!--<div>책짹 <strong><%#= @posts.count %></strong>개</div>-->
+        <div class="title">책짹을 남긴 분들</div>
         <div class="reader-list">
           <% @posts.each do |post| %>
             <!--user delete 이후에 해당 사용자가 남긴 게시물을 DB에 남겨둘 것인가?-->

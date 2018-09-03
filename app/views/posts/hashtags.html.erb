@@ -1,16 +1,29 @@
 <div class="row py-2">
   <div class="col-md-4 order-md-2 md-4 text-center">
     <div class="card my-4" style="width: 18rem;">
+      <div class="profile-image">
+        <!--gravatar image를 profile 이미지로 사용하기-->
+        <%= image_tag avatar_url(current_user), class: "rounded-circle", style: "padding: 30px;" %>  
+      </div>
       <div class="card-body">
-        <h5 class="card-title">추천 사용자</h5>
-          <% @users.each do |u| %>
-            <p class = "card-text" ><%= link_to u.name, u %></p>
-          <% end %>
+        <h5 class="card-title"><%= current_user.name %></h5>
+        <div class="row follow-counter">
+          <div class="col-md-6", style="text-align: right;">팔로잉 : <%= current_user.followees.count %></div>
+          <div class="col-md-6", style="text-align: left;">팔로워 : <%= current_user.followers.count %></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card my-4" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">#<%= @tag.name %></h5>
+        <div>책짹 <strong><%= @tag.posts.count %></strong>개</div>
       </div>
     </div>
   </div>
 
   <div class="col-md-8 order-md-1">
+    <!--여기... 그냥 posts/list 쓰지 말고 좋아요 순으로 posts를 정렬했으면 좋겠음-->
     <%= render 'posts/list' %>
   </div>
 </div>
