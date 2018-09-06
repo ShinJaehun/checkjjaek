@@ -41,10 +41,10 @@
       <div class="card-body">
         <div class="title"><strong><%= @user.name %></strong>님의 정보</div>
         <div style="text-align: left; padding: 0 15px; font-size: 12px;">
-          <div style="margin: 5px 0"><strong class="text-muted">메일주소</strong> <%= @user.email %></div>
-          <div style="margin: 5px 0"><strong class="text-muted">가입</strong> <%= @user.created_at.to_date %></div>
-          <div style="margin: 5px 0"><strong class="text-muted">마지막 로그인</strong> <%= @user.last_sign_in_at.to_date %></div>
-          <div style="margin: 5px 0"><strong class="text-muted">마지막 책짹</strong> <%= @user.posts.last.created_at.to_date %></div>
+          <div style="margin: 5px 0"><strong class="text-muted">메일주소</strong>&nbsp;&nbsp;<%= @user.email %></div>
+          <div style="margin: 5px 0"><strong class="text-muted">가입</strong>&nbsp;&nbsp;<%= @user.created_at.to_date %></div>
+          <div style="margin: 5px 0"><strong class="text-muted">마지막 로그인</strong>&nbsp;&nbsp;<%= @user.last_sign_in_at.to_date %></div>
+          <div style="margin: 5px 0"><strong class="text-muted">마지막 책짹</strong>&nbsp;&nbsp;<%= @user.posts.last.created_at.to_date %></div>
         </div>
       </div>
     </div>

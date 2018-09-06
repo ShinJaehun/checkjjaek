@@ -1,4 +1,13 @@
-/* universal */
+/* color */
+
+.orange {
+  background: #ff9f1a; }
+
+.green {
+  background: #85ad00; }
+
+.blue {
+  background: #0076ad; }
 
 $gray-medium-light: #eaeaea;
 $gray-light: #777;
@@ -6,6 +15,9 @@ $gray: 	#808080;
 $gray-darker: #A9A9A9;
 
 $gray-medium-light: #eaeaea;
+
+
+/* universal */
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -290,23 +302,25 @@ footer {
 
   .content {
     // height: 100px;
-    overflow: hidden;  
+    // overflow: hidden;
+    word-break: break-all; 
+    word-wrap: break-word;
   }
 }
 
 /* posts index list comment */
+  
+.user-photo {
+  padding: 0px;
+  width: 30px;
+  height: 30px;
+}
 
 .post-comment {
   padding-top: 5px;
   padding-bottom: 15px;
   font-size: 14px;
   margin: 0 10px; //상하 좌우
-  
-  .user-photo {
-    padding: 0px;
-    width: 30px;
-    height: 30px;
-  }
 
   .media {
     padding: 5px 0;
@@ -398,6 +412,61 @@ footer {
   margin: 30px 0;
 }
 
+/* new post */
+
+.new-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // background: #eee;
+  padding: 1em;
+  line-height: 1.5em;
+}
+
+.new-content {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  font-size:14px;
+
+  .media-body {
+    padding: 0 10px;
+
+    .card-title {
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+    
+    .card-subtitle {
+      padding-left: 10px;
+      padding-bottom: 10px;
+    }
+    
+    .description {
+      // height: 100px;
+      // overflow: hidden;
+      padding-right: 10px;
+      word-break: break-all; 
+      word-wrap: break-word;
+    }
+  }
+}
+
+
+  
+.content-input {
+  padding: 5px 0;
+  margin: 10px 20px;
+ 
+  .content-panel {
+    margin-left: 15px;
+    width: 90%;
+  }
+  
+  #textarea {
+    height: 150px;
+  }
+
+}
+
 /* miscellaneous */
 
 .debug_dump {
@@ -407,3 +476,4 @@ footer {
   margin-top: 45px;
   @include box_sizing;
 }
+
