@@ -30,35 +30,36 @@
 
 				<div class="media-body">
     	
-  				<h6 class="card-title"><%= params[:title].gsub(/&amp;/, "&") %></h6>
+  				<!--<h3 class="card-title"><%#= params[:title].gsub(/&amp;/, "&") %></h3>-->
+  				<h3 class="card-title"><%= params[:title].html_safe %></h3>
   				<div class="card-subtitle">
   				  <% if params[:category].present? %>
               <div>
-    				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= params[:category] %>
+    				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= params[:category].html_safe %>
     				  </div>
             <% end %>
   				  
             <% if params[:authors].present? %>
               <div>
-    				    <strong class="text-muted">저자</strong>&nbsp;&nbsp;<%= params[:authors] %>
+    				    <strong class="text-muted">저자</strong>&nbsp;&nbsp;<%= params[:authors].html_safe %>
     				  </div>
             <% end %>
 
             <% if params[:translators].present? %>
               <div>
-                <strong class="text-muted">역자</strong>&nbsp;&nbsp;<%= params[:translators] %>
+                <strong class="text-muted">역자</strong>&nbsp;&nbsp;<%= params[:translators].html_safe %>
               </div>
             <% end %>
 
             <% if params[:publisher].present? %>
               <div>
-                <strong class="text-muted">출판사</strong>&nbsp;&nbsp;<%= params[:publisher] %>
+                <strong class="text-muted">출판사</strong>&nbsp;&nbsp;<%= params[:publisher].html_safe %>
               </div>
             <% end %>
             
             <% if params[:date_time].present? %>
             <div>
-              <strong class="text-muted">출판일</strong>&nbsp;&nbsp;<%= params[:date_time] %>
+              <strong class="text-muted">출판일</strong>&nbsp;&nbsp;<%= params[:date_time].html_safe %>
             </div>
             <% end %>
 
@@ -86,10 +87,9 @@
           </div>
         </div>
       </div>
-  
+
             
-            
-    		<!--<div class="col-sm-10 col-md-10">-->
+  		<!--<div class="col-sm-10 col-md-10">-->
       <!--    <div class="panel panel-default">-->
       <!--      <div class="panel-body">                -->
       <!--        <%#= form_for(@post) do |form| %>-->

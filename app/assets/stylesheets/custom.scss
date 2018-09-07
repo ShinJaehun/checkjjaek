@@ -424,37 +424,37 @@ footer {
 .new-content {
   padding-top: 15px;
   padding-bottom: 5px;
-  font-size:14px;
+  font-size:16px;
 
   .media-body {
     padding: 0 10px;
 
     .card-title {
-      font-size: 20px;
       font-weight: bold;
-      padding-bottom: 5px;
+      padding-bottom: 10px;
     }
     
     .card-subtitle {
       padding-left: 10px;
+      padding-right: 10px;
       padding-bottom: 10px;
     }
     
     .description {
       // height: 100px;
       // overflow: hidden;
-      padding-right: 10px;
+      padding-left: 5px;
+      padding-right: 5px;
+      
       word-break: break-all; 
       word-wrap: break-word;
     }
   }
 }
 
-
-  
 .content-input {
   padding: 5px 0;
-  margin: 10px 20px;
+  margin: 20px 15px 20px;
  
   .content-panel {
     margin-left: 15px;

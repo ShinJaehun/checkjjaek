@@ -30,35 +30,35 @@
 
 				<div class="media-body">
     	
-  				<h6 class="card-title"><%= @post.book.title.gsub(/&amp;/, "&") %></h6>
+  				<h3 class="card-title"><%= @post.book.title.html_safe %></h3>
   				<div class="card-subtitle">
   				  <% if @post.book.category.present? %>
               <div>
-    				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= @post.book.category %>
+    				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= @post.book.category.html_safe %>
     				  </div>
             <% end %>
   				  
             <% if @post.book.authors.present? %>
               <div>
-    				    <strong class="text-muted">저자</strong>&nbsp;&nbsp;<%= @post.book.authors %>
+    				    <strong class="text-muted">저자</strong>&nbsp;&nbsp;<%= @post.book.authors.html_safe %>
     				  </div>
             <% end %>
 
             <% if @post.book.translators.present? %>
               <div>
-                <strong class="text-muted">역자</strong>&nbsp;&nbsp;<%= @post.book.translators %>
+                <strong class="text-muted">역자</strong>&nbsp;&nbsp;<%= @post.book.translators.html_safe %>
               </div>
             <% end %>
 
             <% if @post.book.publisher.present? %>
               <div>
-                <strong class="text-muted">출판사</strong>&nbsp;&nbsp;<%= @post.book.publisher %>
+                <strong class="text-muted">출판사</strong>&nbsp;&nbsp;<%= @post.book.publisher.html_safe %>
               </div>
             <% end %>
             
             <% if @post.book.date_time.present? %>
             <div>
-              <strong class="text-muted">출판일</strong>&nbsp;&nbsp;<%= @post.book.date_time %>
+              <strong class="text-muted">출판일</strong>&nbsp;&nbsp;<%= @post.book.date_time.html_safe %>
             </div>
             <% end %>
 
@@ -87,9 +87,7 @@
         </div>
       </div>
   
-            
-            
-    		<!--<div class="col-sm-10 col-md-10">-->
+  		<!--<div class="col-sm-10 col-md-10">-->
       <!--    <div class="panel panel-default">-->
       <!--      <div class="panel-body">                -->
       <!--        <%#= form_for(@post) do |form| %>-->
@@ -106,55 +104,3 @@
   </div>
 </div>
 
-
-
-
-<!--<div class="card">-->
-<!--  <div class="card-header text-center">-->
-<!--    수정하기-->
-<!--  </div>-->
-<!--  <div class="card-body">-->
-<!--      <p>-->
-<!--        <strong>Title:</strong>-->
-<!--        <%#= @post.book.title %>-->
-<!--      </p>-->
-      
-<!--      <p>-->
-<!--        <strong>Authors:</strong>-->
-<!--        <%#= @post.book.authors %>-->
-<!--      </p>-->
-      
-<!--      <p>-->
-<!--        <strong>Thumbnail:</strong>-->
-<!--        <%#= image_tag book_thumbnail150(@post.book.thumbnail) %>-->
-<!--      </p>-->
-
-<!--      <p>-->
-<!--        <strong>Isbn:</strong>-->
-<!--        <%#= @post.book.isbn %>-->
-<!--      </p>-->
-      
-<!--      <p>-->
-<!--        <strong>Publisher:</strong>-->
-<!--        <%#= @post.book.publisher %>-->
-<!--      </p>-->
-
-<!--      <%#= form_for(@post) do |form| %>-->
-      
-<!--        <%#= form.hidden_field :book_id, :value => @post.book.id %>-->
-      
-<!--        <div class="text_area">-->
-<!--          <%#= form.label :content %>-->
-<!--          <%#= form.text_area :content, require: true %>-->
-<!--        </div>-->
-      
-<!--        <div class="actions">-->
-<!--          <%#= form.submit %>-->
-<!--        </div>-->
-        
-<!--      <%# end %>-->
-    
-<!--  </div>-->
-<!--</div>-->
-
-<!--<%#= link_to 'Back', posts_path %>-->
