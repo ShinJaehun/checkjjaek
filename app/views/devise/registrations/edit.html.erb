@@ -1,5 +1,5 @@
 <div class="container">
-  <img class="user-info-logo-img" src="logo/logo.png"></img>
+  <%= image_tag("logo/logo.png", class: "user-info-logo-img") %>
 
   <div class="card card-container">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-user-info"}) do |f| %>
