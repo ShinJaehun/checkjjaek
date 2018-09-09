@@ -10,7 +10,7 @@ module ApplicationHelper
     unless url.to_s.empty?
       'http://t1.daumcdn.net/thumb/R110x0/?fname=' + URI.unescape(url.match(/http%.+/).to_s)
     else
-      '/assets/nia.jpg'
+      'nia.jpg'
     end
   end
   
@@ -19,7 +19,7 @@ module ApplicationHelper
     unless url.to_s.empty?
       'http://t1.daumcdn.net/thumb/R260x0/?fname=' + URI.unescape(url.match(/http%.+/).to_s)
     else
-      '/assets/nia.jpg'
+      'nia.jpg'
     end
   end
   
@@ -28,7 +28,7 @@ module ApplicationHelper
     unless url.to_s.empty?
       "#{url}"
     else
-      '/assets/nia.jpg'
+      'nia.jpg'
     end
   end
   
@@ -40,7 +40,7 @@ module ApplicationHelper
     unless url.to_s.empty?
       'http://t1.daumcdn.net/thumb/R200x0/?fname=' + URI.encode(url)
     else
-      '/assets/nia.jpg'
+      'nia.jpg'
     end
   end
   
@@ -52,7 +52,7 @@ module ApplicationHelper
     unless url.to_s.empty?
       'http://t1.daumcdn.net/thumb/R260x0/?fname=' + URI.encode(url)
     else
-      '/assets/nia.jpg'
+      'nia.jpg'
     end
   end
 end
