@@ -353,12 +353,17 @@ footer {
 
   .book-image {
     padding-top: 15px;
-    padding-bottom: 5px;
   }
   .book-detail{
-    padding: 10px 10px 5px;
+    text-align: left;
+    font-size: 12px;
+    margin: 1rem 1rem;
+    padding: 0 10px;
   }
+  
 }
+
+
 
 .book-reader {
   .title {
@@ -424,7 +429,7 @@ footer {
 .new-content {
   padding-top: 15px;
   padding-bottom: 5px;
-  font-size:16px;
+  font-size:14px;
 
   .media-body {
     padding: 0 10px;
@@ -462,6 +467,7 @@ footer {
   }
   
   #textarea {
+    font-size: 14px;
     height: 150px;
   }
 

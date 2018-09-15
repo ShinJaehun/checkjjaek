@@ -6,10 +6,48 @@
         <!--book image-->
         <%= image_tag book_thumbnail250(@book.thumbnail), class: "border mx-3", width: '250px' %>  
       </div>
+      
       <div class="book-detail">
-        <h6 class="card-title mb-2"><%= @book.title %></h6>
-        <div class="card-subtitle mb-2 text-muted"><%= @book.authors %></div>
-        <div>책짹 <strong><%= @posts.count %></strong>개</div>
+        
+        <h4 class="card-title mb-2"><%= @book.title %></h4>
+        <div class="card-subtitle my-3 ml-2">
+  			  <% if @book.category.present? %>
+            <div>
+  				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= @book.category.html_safe %>
+  				  </div>
+          <% end %>
+  			  
+          <% if @book.authors.present? %>
+            <div>
+  				    <strong class="text-muted">저자</strong>&nbsp;&nbsp;<%= @book.authors.html_safe %>
+  				  </div>
+          <% end %>
+  
+          <% if @book.translators.present? %>
+            <div>
+              <strong class="text-muted">역자</strong>&nbsp;&nbsp;<%= @book.translators.html_safe %>
+            </div>
+          <% end %>
+  
+          <% if @book.publisher.present? %>
+            <div>
+              <strong class="text-muted">출판사</strong>&nbsp;&nbsp;<%= @book.publisher.html_safe %>
+            </div>
+          <% end %>
+          
+          <% if @book.date_time.present? %>
+            <div>
+              <strong class="text-muted">출판일</strong>&nbsp;&nbsp;<%= @book.date_time.html_safe %>
+            </div>
+          <% end %>
+
+	  	  </div>
+
+  			<div class="description">
+          <% if @book.contents.present? %>
+            <%= @book.contents %>
+          <% end %>
+  			</div>
 
       </div>
     </div>
@@ -17,7 +55,7 @@
     <div class="card my-4 book-reader" style="width: 18rem;">
       <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
       <div class="card-body">
-        <div class="title">책짹을 남긴 분들</div>
+        <div class="title">책짹 <strong><%= @posts.count %></strong>개</div>
         <div class="reader-list">
           <% @posts.each do |post| %>
             <!--user delete 이후에 해당 사용자가 남긴 게시물을 DB에 남겨둘 것인가?-->

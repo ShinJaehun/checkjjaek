@@ -173,6 +173,10 @@ class PostsController < ApplicationController
     # 새로 생성하든 기존의 인스턴스를 가지고 오든 @book 인스턴스를 가지고 새로운 post 인스턴스를 생성하기 위해
     # 바인딩할 빈 @post 넘기기
     @post = Post.new(book: @book)
+    
+    # 관련 책짹 보여주기 위해
+    @posts = Post.where(book_id: @book.id).order(created_at: :desc)
+
   end
 
   # GET /posts/1/edit
@@ -180,6 +184,8 @@ class PostsController < ApplicationController
     # and return은 조건에 해당한다면 이후의 코드를 건너뛰고 return 처리한다는 의미
     # current_user가 post를 작성한 user가 아니라면 무조건 root_path로...
     # current_user가 작성하지 않은 포스트를 /posts/1/edit 뭐 이런 형태로 수정하기 위해 접근하면 index 페이지로 되돌린다
+    @posts = Post.where(book_id: @post.book.id).order(created_at: :desc)
+
     redirect_to root_path and return unless @post.user == current_user
   end
   
