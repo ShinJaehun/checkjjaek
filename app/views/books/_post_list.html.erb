@@ -48,10 +48,10 @@
     <div class="post-comment">
       <% post.comments.each do |c| %>
         <div class="media">
-          <%= image_tag avatar_url(c.user), class: "rounded-circle user-photo", title: c.user.name %>
+          <%= link_to image_tag(avatar_url(c.user), class: "rounded-circle user-photo", title: c.user.name), c.user %>
             <div class="media-body">
               <div class="panel-heading">
-                <strong><%= c.user.name %></strong> <span class="text-muted"><%= "#{time_ago_in_words(c.created_at)} 전" %> </span>
+                <strong><%= link_to c.user.name, c.user %></strong> <span class="text-muted"><%= "#{time_ago_in_words(c.created_at)} 전" %> </span>
               </div>
               <div class="panel-body">
                 <%= c.content %> 
