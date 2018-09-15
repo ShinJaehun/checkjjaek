@@ -54,10 +54,19 @@ a {
   font-size: 12px;
 }
 
-textarea {
-  height: 100px;
-  width: 300px;
-  margin-bottom: 5px;
+#textarea {
+  height: 150px;
+  width: 95%;
+
+  font-size: 14px;
+  
+  word-break: break-all; 
+  word-wrap: break-word;
+}
+
+#textfield {
+  word-break: break-all; 
+  word-wrap: break-word;
 }
 
 /* header */
@@ -300,12 +309,6 @@ footer {
     padding-bottom: 10px;
   }
 
-  .content {
-    // height: 100px;
-    // overflow: hidden;
-    word-break: break-all; 
-    word-wrap: break-word;
-  }
 }
 
 /* posts index list comment */
@@ -362,8 +365,6 @@ footer {
   }
   
 }
-
-
 
 .book-reader {
   .title {
@@ -426,37 +427,6 @@ footer {
   line-height: 1.5em;
 }
 
-.new-content {
-  padding-top: 15px;
-  padding-bottom: 5px;
-  font-size:14px;
-
-  .media-body {
-    padding: 0 10px;
-
-    .card-title {
-      font-weight: bold;
-      padding-bottom: 10px;
-    }
-    
-    .card-subtitle {
-      padding-left: 10px;
-      padding-right: 10px;
-      padding-bottom: 10px;
-    }
-    
-    .description {
-      // height: 100px;
-      // overflow: hidden;
-      padding-left: 5px;
-      padding-right: 5px;
-      
-      word-break: break-all; 
-      word-wrap: break-word;
-    }
-  }
-}
-
 .content-input {
   padding: 5px 0;
   margin: 20px 15px 20px;
@@ -464,11 +434,6 @@ footer {
   .content-panel {
     margin-left: 15px;
     width: 90%;
-  }
-  
-  #textarea {
-    font-size: 14px;
-    height: 150px;
   }
 
 }
