@@ -4,12 +4,12 @@
     <div class="card my-4 book-info" style="width: 18rem;">
       <div class="book-image">
         <!--book image-->
-        <%= image_tag book_thumbnail250(@book.thumbnail), class: "border mx-3", width: '250px' %>  
+        <%= link_to image_tag(book_thumbnail250(@book.thumbnail), class: "border mx-3", width: '250px'), @book.url, target: "_blank" %>  
       </div>
       
       <div class="book-detail">
         
-        <h4 class="card-title mb-2"><%= @book.title %></h4>
+        <h4 class="card-title mb-2"><%= link_to @book.title, @book.url, target: "_blank" %></h4>
         <div class="card-subtitle my-3 ml-2">
   			  <% if @book.category.present? %>
             <div>

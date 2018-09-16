@@ -259,26 +259,35 @@ footer {
 
 /* posts index list */
 
-.suggested-friends {
+.additional-information {
   .title {
     font-size: 1rem;
     padding-bottom: 10px;
   }
-  .suggested-friends-list{
+  .info-list{
     font-size: 14px;
     text-align: left;
+    
     .row {
       margin: 5px 0;
+      display: flex;
+      align-items: center;
       
       .user-photo {
         padding: 0px;
         width: 30px;
         height: 30px;
       }
-      .suggested-friend-info {
-        .suggested-friend-info-post-count {
-  
-          margin: 5px 0;
+      
+      .info {
+        margin: 5px 0;
+        max-width: 200px;
+        
+        .overflowed-content {
+          overflow: hidden; 
+          text-overflow: ellipsis;
+          white-space: nowrap; 
+          width: 170px;
         }
       }
     }

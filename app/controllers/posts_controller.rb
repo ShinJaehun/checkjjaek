@@ -22,6 +22,7 @@ class PostsController < ApplicationController
     # @users = User.find(:all, :limit => 10, :order => 'posts_count desc')
     # @suggested_friends_by_posts = User.order(:posts_count => :desc).limit(10)
     @suggested_friends_by_followers =  User.all.sort{|a,b| b.followers.count <=> a.followers.count}.first(10)
+    @recent_posts = Post.order(id: :desc).limit(10);
 
     # @posts = Post.all
     # :content 로 내용 검색을 한 경우에...
