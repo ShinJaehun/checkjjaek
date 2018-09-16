@@ -1,6 +1,9 @@
 <div class="container">
   <%= image_tag("logo/logo.png", class: "user-info-logo-img") %>
-
+  <div class="container pb-2" style="text-align: center; display: inline-block;">
+    <strong><%= User.count %></strong><span class="text-muted">명의 사용자가 </span><strong><%= Post.count %></strong><span class="text-muted">개의 책짹을 남겼습니다.</span>
+  </div>
+  
   <div class="card card-container">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-user-info"}) do |f| %>
       <!--<form class="form-signin">-->

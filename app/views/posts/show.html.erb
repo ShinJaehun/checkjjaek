@@ -5,10 +5,10 @@
     <div class="card my-4" style="width: 18rem;">
       <div class="profile-image">
         <!--gravatar image를 profile 이미지로 사용하기-->
-        <%= image_tag avatar_url(current_user), class: "rounded-circle", style: "padding: 30px;" %>  
+        <%= image_tag avatar_url(@post.user), class: "rounded-circle", style: "padding: 30px;" %>  
       </div>
       <div class="card-body">
-        <h5 class="card-title"><%= current_user.name %></h5>
+        <h5 class="card-title"><strong><%= @post.user.name %></strong>님의 책짹</h5>
       </div>
     </div>
 

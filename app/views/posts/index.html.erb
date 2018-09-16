@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-10 info">
                   <div>
-                    <strong><%= link_to p.user.name, p.user %></strong>님 <span class="small-font"><%= "#{time_ago_in_words(p.created_at)} 전" %></span>
+                    <strong><%= link_to p.user.name, p.user %></strong><span class="small-font">님 <%= "#{time_ago_in_words(p.created_at)} 전" %></span>
                   </div>
                   <div class="overflowed-content">
                     <span class="small-font"><%= link_to p.content, p %></span>
