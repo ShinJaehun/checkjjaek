@@ -1,14 +1,12 @@
 <div class="row py-2">
 
   <div class="col-md-4 order-md-2 md-4 text-center">
-    <!-- current_user가 표시되어야 하는가 아니면 글을 작성한 user가 표시되어야 하는가?-->
     <div class="card my-4" style="width: 18rem;">
       <div class="profile-image">
-        <!--gravatar image를 profile 이미지로 사용하기-->
-        <%= image_tag avatar_url(@post.user), class: "rounded-circle", style: "padding: 30px;" %>  
+        <%= link_to image_tag(avatar_url(@post.user), class: "rounded-circle", style: "padding: 30px;"), @post.user %>  
       </div>
       <div class="card-body">
-        <h5 class="card-title"><strong><%= @post.user.name %></strong>님의 책짹</h5>
+        <h5 class="card-title"><strong><%= link_to @post.user.name, @post.user %></strong>님의 책짹</h5>
       </div>
     </div>
 
