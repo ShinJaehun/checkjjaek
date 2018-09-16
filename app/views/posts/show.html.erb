@@ -12,7 +12,24 @@
       </div>
     </div>
 
+  
+    <% if @post.like_users.count > 0 %>
+      
+      <div class="card my-4 book-reader" style="width: 18rem;">
+        <div class="card-body">
+          <div class="title">이 책짹을 좋아하는 분들</div>
+          <div class="reader-list">
+            <% @post.like_users.each do |u| %>
+              <%= link_to image_tag(avatar_url(u), class: "rounded-circle user-photo", title: u.name), u %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+        
+    <% end %>
+  
   </div>
+
 
   <div class="col-md-8 order-md-1">
     <%= render 'item' %>
