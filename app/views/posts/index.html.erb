@@ -3,7 +3,6 @@
   <div class="col-md-4 order-md-2 md-4 text-center">
     <div class="card my-4" style="width: 18rem;">
       <div class="profile-image">
-        <!--gravatar image를 profile 이미지로 사용하기-->
         <%= image_tag avatar_url(current_user), class: "rounded-circle", style: "padding: 30px;" %>  
       </div>
       <div class="card-body">
@@ -26,7 +25,6 @@
     </div>
 
     <div class="card my-4 additional-information" style="width: 18rem;">
-      <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
       <div class="card-body">
         <div class="title">팔로우 추천</div>
           <div class="info-list">
@@ -47,7 +45,6 @@
     </div>
     
     <div class="card my-4 additional-information" style="width: 18rem;">
-      <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
       <div class="card-body">
         <div class="title">최근 책짹</div>
           <div class="info-list">
@@ -60,6 +57,41 @@
                 <div class="col-md-10 info">
                   <div>
                     <strong><%= link_to p.user.name, p.user %></strong><span class="small-font">님 <%= "#{time_ago_in_words(p.created_at)} 전" %></span>
+                  </div>
+                  <div class="overflowed-content">
+                    <span class="small-font"><%= link_to p.content, p %></span>
+                  </div>
+                </div>
+              </div>  
+            <% end %>
+          </div>
+
+      </div>
+    </div>
+    
+    <div class="card my-4 additional-information" style="width: 18rem;">
+      <div class="card-body">
+        <div class="title">가장 많은 좋아요를 받은 책짹</div>
+          <div class="info-list">
+          
+            <% @favorite_posts.each do |p| %>
+              <div class="row">
+                <div class="col-md-2">
+                  <%= link_to image_tag(avatar_url(p.user), class: "rounded-circle user-photo", title: p.user.name), p.user %>
+                </div>
+                <div class="col-md-10 info">
+                  <div>
+                    <strong><%= link_to p.user.name, p.user %></strong>
+                    <span class="small-font">님 
+                      <% if !p.like_users.include?(current_user)%>
+                        <%= link_to( content_tag(:i, "",class: ["far", "fa-thumbs-up"]), like_post_path(p), method: :post )%>
+                      <% else %>
+                        <%= link_to( content_tag(:i, "",class: ["fas", "fa-thumbs-up"]), like_post_path(p), method: :post )%>
+                      <% end %>
+                      <% if p.like_users.count > 0 %>
+                        <span class="badge badge-primary badge-pill"><%= p.like_users.count %></span>
+                      <% end %>
+                    </span>
                   </div>
                   <div class="overflowed-content">
                     <span class="small-font"><%= link_to p.content, p %></span>

@@ -14,15 +14,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    
-    # posts/index의 추천 사용자, 차후에 없애려고 하고 있음...
-    # @users = User.all
-    
-    # user를 posts 수로 정렬하기 위해 posts의 counter cache를 사용하고 있음
-    # @users = User.find(:all, :limit => 10, :order => 'posts_count desc')
-    # @suggested_friends_by_posts = User.order(:posts_count => :desc).limit(10)
+
+    # follower 수를 기준으로 한 추천 사용자    
     @suggested_friends_by_followers =  User.all.sort{|a,b| b.followers.count <=> a.followers.count}.first(10)
+    # 최근 책짹
     @recent_posts = Post.order(id: :desc).limit(10);
+    # 가장 많은 좋아요를 받은 책짹
+    @favorite_posts = Post.all.sort{|a,b| b.like_users.count <=> a.like_users.count}.first(10)
 
     # @posts = Post.all
     # :content 로 내용 검색을 한 경우에...
