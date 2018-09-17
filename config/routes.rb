@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
   
   # 책 검색
-  get 'search', to: 'posts#search'
+  get 'book_search', to: 'posts#book_search'
 
   #해쉬태그 관련
   get '/posts/hashtag/:name', to: 'posts#hashtags'

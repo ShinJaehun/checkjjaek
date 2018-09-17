@@ -23,14 +23,14 @@ module ApplicationHelper
     end
   end
   
-  def book_thumbnail_search(url)
-    # book image가 있으면 해당 url을, 없으면 no image avaliable 이미지를 리턴
-    unless url.to_s.empty?
-      "#{url}"
-    else
-      'nia.jpg'
-    end
-  end
+  # def book_thumbnail_search(url)
+  #   # book image가 있으면 해당 url을, 없으면 no image avaliable 이미지를 리턴
+  #   unless url.to_s.empty?
+  #     "#{url}"
+  #   else
+  #     'nia.jpg'
+  #   end
+  # end
   
   def book_thumbnail150(url)
     # width가 150인 thumbnail 경로 리턴

@@ -5,15 +5,15 @@
   
   <% if @items.present? %>
 
-    <div class="search-title">
+    <div class="book-search-title">
       <h4><b class="text-warning"><%= @keyword_book %></b> 책 찾기</h4>
     </div>
     
-    <div class="search_result">
+    <div class="book-search-result">
             
       <% @items.each do |item| %>
   
-        <div class="book_item media">
+        <div class="book-item media">
           <%= image_tag extract_thumbnail110_url(strip_tags(item['thumbnail'])), class: "thumbnail" %>
   
           <div class="info media-body">
@@ -61,25 +61,25 @@
 
   <% end %>
   
-  <div class="search-result-pagination">
+  <div class="book-search-result-pagination">
     <nav aria-label="Page navigation">
     <!--pagination 처리 : 걍 의식의 흐름대로 코딩했는데... 나중에 어떤 오류가 발생할지 장담할 수 없음-->
       <ul class="pagination justify-content-center">
         <% if @current_page > 3  %>
-          <li class="page-item"><%= link_to 1, search_path(keyword_book: @keyword_book, page: 1), class: "page-link" %></li>
-          <li class="page-item"><%= link_to '...', search_path(keyword_book: @keyword_book, page: @start_index - 1), class: "page-link" %></li>
+          <li class="page-item"><%= link_to 1, book_search_path(keyword_book: @keyword_book, page: 1), class: "page-link" %></li>
+          <li class="page-item"><%= link_to '...', book_search_path(keyword_book: @keyword_book, page: @start_index - 1), class: "page-link" %></li>
         <% end %>
         <% @start_index.upto(@end_index) do |p| %>
           <% if p == @current_page %>
-            <li class="page-item active"><%= link_to "#{p}", search_path(keyword_book: @keyword_book, page: p), class: "page-link" %></li>
+            <li class="page-item active"><%= link_to "#{p}", book_search_path(keyword_book: @keyword_book, page: p), class: "page-link" %></li>
           <% else %>
-            <li class="page-item"><%= link_to p, search_path(keyword_book: @keyword_book, page: p), class: "page-link" %></li>
+            <li class="page-item"><%= link_to p, book_search_path(keyword_book: @keyword_book, page: p), class: "page-link" %></li>
           <% end %>
         <% end %>
         
         <% if @current_page < @max_index - 2 %>
-          <li class="page-item"><%= link_to '...', search_path(keyword_book: @keyword_book, page: @end_index + 1), class: "page-link" %></li>
-          <li class="page-item"><%= link_to @max_index, search_path(keyword_book: @keyword_book, page: @max_index), class: "page-link" %></li>
+          <li class="page-item"><%= link_to '...', book_search_path(keyword_book: @keyword_book, page: @end_index + 1), class: "page-link" %></li>
+          <li class="page-item"><%= link_to @max_index, book_search_path(keyword_book: @keyword_book, page: @max_index), class: "page-link" %></li>
         <% end %>
       </ul>
     </nav>

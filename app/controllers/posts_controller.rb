@@ -43,10 +43,8 @@ class PostsController < ApplicationController
   def show
   end
   
-  def search
-    # @post = Post.new
-    # Post.set_book_data(params[:keyword])
-    
+  def book_search
+
     # keyword_book으로 검색한 경우(책 검색 결과에 포스팅하기)
     if params.has_key?(:keyword_book)
       @keyword_book = params[:keyword_book]

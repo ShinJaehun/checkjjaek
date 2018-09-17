@@ -294,7 +294,7 @@ footer {
   }
 }
 
-.search-book .input-group .search-book-input {
+.book-search-form .input-group .search-book-input {
   border-radius: 0.25rem;
 }
 
@@ -391,21 +391,22 @@ footer {
   }
 }
 
-/* search */
+/* book-search */
 
-.search-title {
+.book-search-title {
   margin: 30px 0 30px 30px;
 }
 
-.search_result {
+.book-search-result {
   font-size: 14px;
   
   // overflow: hidden;
   
-  .book_item {
+  .book-item {
     border-bottom: 2px dotted #666; 
     padding: 20px 0;
     margin: 0 30px;  
+    
     .thumbnail {
       // position: relative;
       float: left;
@@ -423,7 +424,7 @@ footer {
   }
 }
 
-.search-result-pagination {
+.book-search-result-pagination {
   margin: 30px 0;
 }
 
