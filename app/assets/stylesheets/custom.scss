@@ -402,12 +402,12 @@ footer {
   
   // overflow: hidden;
   
-  .book-item {
+  .item {
     border-bottom: 2px dotted #666; 
     padding: 20px 0;
     margin: 0 30px;  
     
-    .thumbnail {
+    .item-thumbnail {
       // position: relative;
       float: left;
       // margin: 20px 0 0 20px;
@@ -422,11 +422,65 @@ footer {
       }
     }
   }
+  .item:last-child {
+    border-bottom: 0px; 
+    padding: 20px 0;
+    margin: 0 30px;  
+    
+  }
 }
 
 .book-search-result-pagination {
   margin: 30px 0;
 }
+
+/* search */
+
+
+.search-title {
+  margin: 30px 0 30px 30px;
+}
+
+.search-result {
+  font-size: 14px;
+  
+  // overflow: hidden;
+  
+  .title {
+    margin: 20px 50px ;
+    font-size: 20px;
+  }
+  
+  .item {
+    border-bottom: 2px dotted #666; 
+    padding: 20px 0;
+    margin: 0 50px;  
+    
+    .item-thumbnail {
+      // position: relative;
+      float: left;
+      // margin: 20px 0 0 20px;
+      width: 80px;
+    }
+  
+    .info{
+      padding: 0 20px;
+      
+      .contents{
+        margin-top: 5px;
+      }
+    }
+  }
+  .item:last-child {
+    border-bottom: 0px; 
+    padding: 20px 0;
+    margin: 0 50px;  
+  }
+      
+
+}
+
+
 
 /* new post */
 

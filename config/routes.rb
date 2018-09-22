@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     post 'follow', to: 'users#follow', as: :follow, on: :member
   end
   
+  get 'search', to: 'posts#search'
+  
   # 책 검색
   get 'book_search', to: 'posts#book_search'
 

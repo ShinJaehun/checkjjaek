@@ -22,20 +22,7 @@ class PostsController < ApplicationController
     # 가장 많은 좋아요를 받은 책짹
     @favorite_posts = Post.all.sort{|a,b| b.like_users.count <=> a.like_users.count}.first(10)
 
-    # @posts = Post.all
-    # :content 로 내용 검색을 한 경우에...
-    if params.has_key?(:content)
-      # params에서 content 내용으로 검색해서 포함하는 posts를 불러오기
-      # params 앞 뒤로 %를 넣은 이유는 그 앞쪽과 뒷쪽 
-      # 일이삼사오
-      # 이삼사, 삼사오 모두 검색
-      # % 없이는 일이삼사오 만 검색함
-      # like는 비슷한 것을 검색, % 는 DB SQL과 관련 있는 내용...
-      @posts = Post.where('content like ?', "%#{params[:content]}%").order(created_at: :desc)
-    else 
-      # followees의 post와 마지막에 자기 자신이 쓴 글 까지 추가하기 위해서 push했음
-      @posts = Post.where(user_id: current_user.followees.ids.push(current_user.id)).order(created_at: :desc)
-    end
+    @posts = Post.where(user_id: current_user.followees.ids.push(current_user.id)).order(created_at: :desc)
   end
 
   # GET /posts/1
@@ -43,13 +30,25 @@ class PostsController < ApplicationController
   def show
   end
   
+  def search
+    if params.has_key?(:keyword)
+      @keyword = params[:keyword]
+      
+      if @keyword.present?
+        @searched_users = User.where('name like ?', "%#{@keyword}%").order(created_at: :desc)
+        @searched_books = Book.where('title like ?', "%#{@keyword}%").order(created_at: :desc)
+        @searched_posts = Post.where('content like ?', "%#{@keyword}%").order(created_at: :desc)
+      end
+
+    end
+    
+  end
+  
   def book_search
 
     # keyword_book으로 검색한 경우(책 검색 결과에 포스팅하기)
     if params.has_key?(:keyword_book)
       @keyword_book = params[:keyword_book]
-      
-      @page_status = 0 # 검색중
       
       # 검색어가 있다면...
       if @keyword_book.present?
@@ -111,9 +110,7 @@ class PostsController < ApplicationController
         # puts "start_index : " + @start_index.to_s + " end_index : " + @end_index.to_s 
         
         @items = hash['documents']
-            
-      else
-        @page_status = 2 # 검색어 비었음
+
       end
     end
   

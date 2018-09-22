@@ -1,4 +1,4 @@
-<% if @page_status == 2 %>
+<% unless @keyword_book.present? %>
   <h1>검색어를 입력하세요.</h1>
 
 <% else %>
@@ -13,8 +13,8 @@
             
       <% @items.each do |item| %>
   
-        <div class="book-item media">
-          <%= image_tag extract_thumbnail110_url(strip_tags(item['thumbnail'])), class: "thumbnail" %>
+        <div class="item media">
+          <%= image_tag extract_thumbnail110_url(strip_tags(item['thumbnail'])), class: "item-thumbnail" %>
   
           <div class="info media-body">
             <div class="title">

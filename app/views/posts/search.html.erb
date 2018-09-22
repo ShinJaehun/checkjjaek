@@ -1,0 +1,73 @@
+<% unless @keyword.present? %>
+  <h1>검색어를 입력하세요.</h1>
+
+<% else %>
+
+
+  <div class="search-title">
+    <h4><b class="text-warning"><%= @keyword %></b> 검색결과</h4>
+  </div>
+  
+
+  <div class="search-result">
+    
+    <div class="container">
+      <div>
+        <% if @searched_users.present? %>
+          <div class="title"><strong>사용자</strong></div>
+          <% @searched_users.each do |u| %>
+            <div class="item media">  
+              <%= link_to image_tag(avatar_url(u), class: "rounded-circle user-photo", title: u.name), u %>
+              <div class="info media-body">
+                <strong><%= link_to u.name, u %></strong><span class="small-font">님</span>
+              </div>  
+            </div>
+          <% end %>
+        <% end %>        
+      </div>
+
+      <div>
+        <% if @searched_books.present? %>
+          <div class="title"><strong>책</strong></div>
+          <% @searched_books.each do |b| %>
+            <div class="item media">  
+              <%= link_to image_tag(book_thumbnail150(b.thumbnail), class: "border mx-3", width:'80px'), b %>
+              <div class="info media-body">
+                <strong><%= link_to b.title, b %></strong>
+                <span class="small-font"><%= b.authors %> 
+                </span>
+              </div>
+            </div>
+          <% end %>
+        <% end %>  
+      </div>      
+      
+      <div>
+        <% if @searched_posts.present? %>
+          <div class="title"><strong>책짹</strong></div>
+          <% @searched_posts.each do |p| %>
+            <div class="item media">  
+              <%= link_to image_tag(avatar_url(p.user), class: "rounded-circle user-photo", title: p.user.name), p.user %>
+              <div class="info media-body">
+                <div>
+                  <strong><%= link_to p.user.name, p.user %></strong>
+                  <span class="small-font">님 <%= "#{time_ago_in_words(p.created_at)} 전" %></span>
+                  <div class="overflowed-content">
+                    <span class="small-font"><%= link_to p.content, p %></span>
+                  </div>
+                </div>
+                
+              </div>
+            </div>          
+          <% end %>
+        <% end %>  
+      </div>  
+      
+    </div>
+  </div>
+
+
+<% end %>
+  
+
+
