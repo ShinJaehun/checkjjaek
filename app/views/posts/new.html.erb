@@ -51,62 +51,12 @@
       </div>
     </div>
 
-    <% unless @posts.count == 0 %>
-      <div class="card my-4 book-reader" style="width: 18rem;">
-        <!-- 그냥 card-body만 위로 갖다 붙이면 경계선이 붙어 버린다. -->
-        <div class="card-body">
-          <div class="title">책짹 <strong><%= @posts.count %></strong>개</div>
-          <div class="reader-list">
-            <% @posts.each do |post| %>
-              <!--user delete 이후에 해당 사용자가 남긴 게시물을 DB에 남겨둘 것인가?-->
-              <!--일단 user와 post model에서 has_many는 무조건 dependent: :destroy로 줘서 몽땅 삭제하게 해 놨음-->
-              <!--보존이 필요하다면 아래와 같은 방법으로 DB에는 남아 있지만 테이블에 존재하지 않다면 보여주지 안는 식으로 처리해야 함-->
-              <%# if User.all.include?(post.user) %>
-              <!--이미지 태그에 링크를(class를 image_tag() 외부에 지정하면 a의 class에 적용이 된다-->
-              <%= link_to image_tag(avatar_url(post.user), class: "rounded-circle user-photo", title: post.user.name), post.user %>
-              <!--이미지 태그만-->
-              <%#= image_tag avatar_url(post.user), class: "rounded-circle user-photo" %>
-              <%# end %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    
   </div>
 
   <div class="col-md-8 order-md-1">
 
-    <div class="new-card card my-4">
-      <div class="content-input">
-        <div class="row">
-          <%= image_tag avatar_url(current_user), class: "rounded-circle user-photo" %>
-          <div class="content-panel">                
-            <%= form_for(@post) do |form| %>
-              <%= form.hidden_field :book_id, :value => @post.book.id %>
-              <%= form.text_area :content, id: "textarea", class: 'form-control counted', style: 'margin-bottom:10px;', maxlength: '200', require: true, placeholder: '이 책을 읽고 무엇을 느꼈나요?' %>
-              <!--<h6 class="pull-right" id="counter"></h6>-->
-              <%= form.submit '책짹', class: 'btn btn-info' %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-            
-  		<!--<div class="col-sm-10 col-md-10">-->
-      <!--    <div class="panel panel-default">-->
-      <!--      <div class="panel-body">                -->
-      <!--        <%#= form_for(@post) do |form| %>-->
-      <!--          <%#= form.hidden_field :book_id, :value => @post.book.id %>-->
-      <!--          <%#= form.text_area :content, id: "textarea", class: 'form-control counted', style: 'margin-bottom:10px;', maxlength: '200', require: true, placeholder: '이 책을 읽고 무엇을 느꼈나요?' %>-->
-                <!--<h6 class="pull-right" id="counter"></h6>-->
-      <!--          <%#= form.submit '책짹', class: 'btn btn-info' %>-->
-      <!--        <%# end %>-->
-      <!--      </div>-->
-      <!--    </div>-->
-      <!--  </div>-->
-  
-    </div>
+    <%= render partial: 'form', locals: { postable: @book } %>
+    
   </div>
 </div>
 

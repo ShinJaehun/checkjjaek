@@ -11,7 +11,8 @@ class Post < ApplicationRecord
   belongs_to :user, :counter_cache => :posts_count
 
   # Book과 Post의 1:N 관계
-  belongs_to :book
+  # belongs_to :book
+  belongs_to :postable, polymorphic: true
   
   # Post와 Comment의 1:N 관계
   has_many :comments, dependent: :destroy

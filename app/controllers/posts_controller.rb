@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :load_postable, only: [:create]
+  
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
   
   # cancancan에서 user 로그인 상태를 체크하므로 check_user는 불필요
@@ -23,6 +25,7 @@ class PostsController < ApplicationController
     @favorite_posts = Post.all.sort{|a,b| b.like_users.count <=> a.like_users.count}.first(10)
 
     @posts = Post.where(user_id: current_user.followees.ids.push(current_user.id)).order(created_at: :desc)
+    
   end
 
   # GET /posts/1
@@ -43,6 +46,7 @@ class PostsController < ApplicationController
     end
     
   end
+  
   
   def book_search
 
@@ -119,36 +123,20 @@ class PostsController < ApplicationController
     
   end
 
+  
   # GET /posts/new
   def new
-    # isbn을 기준으로 books 테이블에 동일한 책이 없다면
     unless @book = Book.find_by(isbn: params[:isbn])
     
-      # image 같은 경우는 URL을 저장해야 하기 때문에...
       thumbnail_url = params[:thumbnail]
       
-      #image_path = URI.parse(url).host + URI.parse(params[:image]).path
-      # 이미지 경로 : bookthumb-phinf.pstatic.net/cover/001/559/00155992.jpg
-      #image_path = url.gsub(/\?.*/, '')
-      # 이미지 경로 : https://bookthumb-phinf.pstatic.net/cover/001/559/00155992.jpg
-      # 준우 샘이 경로는 이렇게 full URL 형식으로 놔두는 편이 낫다고...
-      # API가 제공하는 책 썸네일은 https인데 불러오지 못함...(인증서 관련)
-      # 그래서 경로 앞에 http://만 붙이도록 함
       unless thumbnail_url.to_s.empty?
-        # image_path = "http://" + URI.parse(url).host + URI.parse(params[:image]).path
-        # thumbnail_path = URI.unescape(url.match(/http%.+/).to_s)
-        
-        # thumbnail_path = URI.unescape(thumbnail_url.match(/(http.*)(http.*)/)[2].to_s)
         thumbnail_path = URI.unescape(thumbnail_url.match(/^http.+?(http.+?)%3F/)[1].to_s)
       else
         thumbnail_path = nil  
       end
       
-      # book instance를 DB에 저장
       @book = Book.create(
-        # 책 제목에 &가 있으면 &amp;가 붙어 저장되는 버그를 해결 
-        # title: params[:title].gsub(/&amp;/, "&"),
-        # 그냥 이렇게 라이브러리를 사용하는게 낫겠지!
         title: CGI.unescapeHTML(params[:title]),
         isbn:  params[:isbn],
         authors:  params[:authors],
@@ -162,14 +150,7 @@ class PostsController < ApplicationController
       )  
     end
     
-    # 준우 샘이 위 로직은 find_or_create_by() 를 이용해서 구현하는 것도 좋을 것 같다고 하심
-    
-    # 새로 생성하든 기존의 인스턴스를 가지고 오든 @book 인스턴스를 가지고 새로운 post 인스턴스를 생성하기 위해
-    # 바인딩할 빈 @post 넘기기
-    @post = Post.new(book: @book)
-    
-    # 관련 책짹 보여주기 위해
-    @posts = Post.where(book_id: @book.id).order(created_at: :desc)
+    @post = @book.posts.new
 
   end
 
@@ -191,13 +172,12 @@ class PostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
-
   # POST /posts
   # POST /posts.json
   def create
-    # @post = Post.new(post_params)
-    # white list로 넘어온 content와 book_id를 가지고 current_user의 Post 생성하기
-    @post = current_user.posts.new(post_params)
+    
+    @post = @postable.posts.new(post_params)
+    @post.user = current_user
 
     respond_to do |format|
       if @post.save
@@ -256,11 +236,18 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   # white list로 content와 함께 저장된 book instance의 book_id 넘기기
   def post_params
-    params.require(:post).permit(:content, :book_id)
+    # params.require(:post).permit(:content, :book_id)
+    params.require(:post).permit(:content)
+
   end
-  
-  # cancancan에서 user의 로그인 상태를 확인하므로 불필요함
+    # cancancan에서 user의 로그인 상태를 확인하므로 불필요함
   # def check_user
   #   redirect_to root_path, notice: '권한이 없습니다.' and return unless @post.user == current_user
   # end
+  
+  def load_postable
+    resource, id = request.path.split('/')[1, 2]
+    @postable = resource.singularize.classify.constantize.find(id)
+    
+  end
 end

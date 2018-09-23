@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     # like_post_path라는 별칭이 생긴다...
     resources :comments, only: [:create, :destroy]
   end
+  
+  resources :books do
+    resources :posts
+  end
 
   resources :users, only:[:show] do
     post 'follow', to: 'users#follow', as: :follow, on: :member
@@ -25,5 +29,5 @@ Rails.application.routes.draw do
   get '/posts/hashtag/:name', to: 'posts#hashtags'
   
   # 특정 책과 관련된 post 보여주기
-  get '/books/:id', to: 'books#show', as: 'book'
+  # get '/books/:id', to: 'books#show', as: 'book'
 end
