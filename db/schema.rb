@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_175708) do
+ActiveRecord::Schema.define(version: 2018_09_15_150841) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -60,9 +60,8 @@ ActiveRecord::Schema.define(version: 2018_09_22_175708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.integer "postable_id"
-    t.string "postable_type"
-    t.index ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type"
+    t.integer "book_id"
+    t.index ["book_id"], name: "index_posts_on_book_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -71,13 +70,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_175708) do
     t.integer "tag_id"
     t.index ["post_id"], name: "index_posts_tags_on_post_id"
     t.index ["tag_id"], name: "index_posts_tags_on_tag_id"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.integer "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_reports_on_book_id"
   end
 
   create_table "roles", force: :cascade do |t|

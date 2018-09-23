@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root 'posts#index'
-  
-  resources :reports do
-    resources :posts
-  end
-  
   resources :posts do
     post 'like', to: 'posts#like', as: :like, on: :member
     # member를 붙이지 않으면 : posts/:post_id/like 

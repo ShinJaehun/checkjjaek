@@ -6,14 +6,12 @@ class Post < ApplicationRecord
   # 사용자의 ID 필드가 입력되어 있어야 함
   validates :user_id, presence: true
 
-  belongs_to :postable, polymorphic: true
-
   # User와 Post의 1:N 관계
   # counter_cache는 post 수에 따른 user 리스트를 얻기 위해서
   belongs_to :user, :counter_cache => :posts_count
 
   # Book과 Post의 1:N 관계
-  # belongs_to :book
+  belongs_to :book
   
   # Post와 Comment의 1:N 관계
   has_many :comments, dependent: :destroy
