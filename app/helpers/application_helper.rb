@@ -55,4 +55,13 @@ module ApplicationHelper
       'nia.jpg'
     end
   end
+  
+  def book_from_post(post)
+    # post에서 book 정보를 가져옴
+    unless post.nil?
+      Book.find(post.postable_id)
+    end
+  end
+  
+  
 end
