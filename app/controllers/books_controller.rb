@@ -4,11 +4,12 @@ class BooksController < ApplicationController
   load_and_authorize_resource
 
   def show
-    @posts = Post.where(book_id: @book.id).order(created_at: :desc)
-
+    # @posts = Post.where(book_id: @book.id).order(created_at: :desc)
+    @posts = Post.where(postable_id: @book.id).order(created_at: :desc)
   end
-
+  
   # def book_search
+  #   puts "############################################################"
 
   #   # keyword_book으로 검색한 경우(책 검색 결과에 포스팅하기)
   #   if params.has_key?(:keyword_book)
@@ -82,9 +83,12 @@ class BooksController < ApplicationController
   #   @items ||= []
     
   # end
-
   
   # def new
+  #   # book_search에서 new action을 호출해서
+  #   # @book을 생성하는 거라면 아래 실행
+  #   # 다른 곳에서 new action을 호출해서
+  #   # object를 생성할 때는 else로...
   #   unless @book = Book.find_by(isbn: params[:isbn])
     
   #     thumbnail_url = params[:thumbnail]
@@ -108,10 +112,8 @@ class BooksController < ApplicationController
   #       category: params[:category]
   #     )  
   #   end
-    
-  #   @post = @book.posts.new
   # end
-  
+
   private
   
   def set_book

@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
+
   root 'posts#index'
+
+  # concern :postable do
+  #   resources :posts
+  # end
+
   resources :posts do
     post 'like', to: 'posts#like', as: :like, on: :member
     # member를 붙이지 않으면 : posts/:post_id/like 
@@ -11,9 +17,16 @@ Rails.application.routes.draw do
     # like_post_path라는 별칭이 생긴다...
     resources :comments, only: [:create, :destroy]
   end
-  
+
+  # resources :books, concerns: :postable
+  # resources :photos, concerns: :postable
+
   resources :books do
-    resources :posts
+    resources :posts, module: :books
+  end
+
+  resources :photos do
+    resources :posts, module: :photos
   end
 
   resources :users, only:[:show] do
@@ -23,11 +36,13 @@ Rails.application.routes.draw do
   get 'search', to: 'posts#search'
   
   # 책 검색
-  get 'book_search', to: 'posts#book_search'
-
+  get '/book_search', to: 'posts#book_search'
+  
   #해쉬태그 관련
   get '/posts/hashtag/:name', to: 'posts#hashtags'
   
   # 특정 책과 관련된 post 보여주기
   # get '/books/:id', to: 'books#show', as: 'book'
+  get '/books/:id', to: 'books#show'
+
 end

@@ -20,6 +20,7 @@
             <div class="title">
               <%= link_to item['title'].html_safe, 
                 new_post_path(
+                  type: "Book",
                   title: strip_tags(item['title']),
                   isbn: strip_tags(item['isbn']),
                   authors: strip_tags(item['authors'].join(",")),

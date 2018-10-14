@@ -14,8 +14,9 @@ gem 'rest-client'
 gem 'rails_db'
 
 # 이미지 처리
-# gem 'carrierwave'
-# gem 'mini_magick', '~> 4.8'
+gem 'fog'
+gem 'carrierwave'
+gem 'mini_magick', '~> 4.8'
 
 # 사용자 인증
 gem 'devise'
