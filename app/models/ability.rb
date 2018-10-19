@@ -34,6 +34,8 @@ class Ability
       can :create, Comment
       can :destroy, Comment, user_id: user.id
       
+      can :book_search, Book
+      
     end
     
     # Define abilities for the passed in user here. For example:
