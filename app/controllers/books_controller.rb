@@ -87,29 +87,70 @@ class BooksController < ApplicationController
     # @book을 생성하는 거라면 아래 실행
     # 다른 곳에서 new action을 호출해서
     # object를 생성할 때는 else로...
-    unless @book = Book.find_by(isbn: params[:isbn])
+      
+    @book = Book.new
+    @book.posts.new    
     
-      thumbnail_url = params[:thumbnail]
+    # unless @book = Book.find_by(isbn: params[:isbn])
+    #   # book instance를 DB에 저장
+    #   @book = Book.create(
+    #     # 책 제목에 &가 있으면 &amp;가 붙어 저장되는 버그를 해결 
+    #     # title: params[:title].gsub(/&amp;/, "&"),
+    #     # 그냥 이렇게 라이브러리를 사용하는게 낫겠지!
+    #     title: CGI.unescapeHTML(params[:title]),
+    #     isbn:  params[:isbn],
+    #     authors:  params[:authors],
+    #     thumbnail:  thumbnail_path,
+    #     publisher: params[:publisher],
+    #     contents: CGI.unescapeHTML(params[:contents]),
+    #     url: params[:url],
+    #     date_time: params[:date_time],
+    #     translators: params[:translators],
+    #     category: params[:category]
+    #   )
+
+    # end
+  
+
+      # thumbnail_url = params[:thumbnail]
       
-      unless thumbnail_url.to_s.empty?
-        thumbnail_path = URI.unescape(thumbnail_url.match(/^http.+?(http.+?)%3F/)[1].to_s)
-      else
-        thumbnail_path = nil  
-      end
+      # unless thumbnail_url.to_s.empty?
+      #   thumbnail_path = URI.unescape(thumbnail_url.match(/^http.+?(http.+?)%3F/)[1].to_s)
+      # else
+      #   thumbnail_path = nil  
+      # end
       
-      @book = Book.create(
-        title: CGI.unescapeHTML(params[:title]),
-        isbn:  params[:isbn],
-        authors:  params[:authors],
-        thumbnail:  thumbnail_path,
-        publisher: params[:publisher],
-        contents: CGI.unescapeHTML(params[:contents]),
-        url: params[:url],
-        date_time: params[:date_time],
-        translators: params[:translators],
-        category: params[:category]
-      )  
-    end
+  end
+  
+  def create
+
+    @book = Book.new(book_params)
+    @book.save
+
+    # unless @book = Book.find_by(isbn: @book.isbn)
+    # # unless @book = Book.find_by(isbn: params[:isbn])
+    #   puts "없어요"
+    #   puts "isbn : " + @book.isbn
+    # else
+      # puts "있어요"
+      
+      # params.require(:post)
+      # puts "isbn : " + @book.isbn
+      # puts "content 1 : " + params[:content].to_s
+      # puts "content 2 : " + @book.posts.content
+      
+      # # post = Post.new(postable: @book)
+      # post = @book.posts.new
+      # post.user = current_user
+      # # post.content = params[:content]
+      # # post.content = @book.attribute
+      # post.save
+      # # post.save
+    # end
+
+    
+    redirect_to root_path
+    
   end
 
   private
@@ -117,4 +158,12 @@ class BooksController < ApplicationController
   def set_book
     @book = Book.find(params[:id])
   end
+  
+  def book_params
+    params.require(:book).permit(:title, :isbn, :authors, :thumbnail, :publisher, :contents, :url, :date_time, :translators, :category, posts_attributes: [:user_id, :content])
+  end
+  
+  # def post_params
+  #   params.require(:book).permit(:user_id, :content)
+  # end
 end

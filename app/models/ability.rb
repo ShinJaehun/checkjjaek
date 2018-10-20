@@ -36,6 +36,8 @@ class Ability
       
       can :book_search, Book
       
+      can :manage, Book
+      
     end
     
     # Define abilities for the passed in user here. For example:
