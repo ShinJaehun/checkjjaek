@@ -56,12 +56,13 @@ module ApplicationHelper
     end
   end
   
-  def book_from_post(post)
-    # post에서 book 정보를 가져옴
-    unless post.nil?
-      Book.find(post.postable_id)
-    end
-  end
+  # def book_from_post(post)
+  #   # 이런 helper 쓰지 말고 그냥 post.postable을 사용하면 돼
+  #   # post에서 book 정보를 가져옴
+  #   unless post.nil?
+  #     Book.find(post.postable_id)
+  #   end
+  # end
   
   
 end

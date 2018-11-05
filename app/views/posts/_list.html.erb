@@ -6,13 +6,13 @@
       <!--포스트 내용-->
       <div class="post-content media">
         <!--책 이미지-->
-        <%= link_to image_tag(book_thumbnail150(book_from_post(post).thumbnail), class: "border mx-3", width:'150px'), book_from_post(post) %>
+        <%= link_to image_tag(book_thumbnail150(post.postable.thumbnail), class: "border mx-3", width:'150px'), post.postable %>
   
         <div class="media-body">
           <!--책 제목-->
-          <h6 class="card-title mb-2"><%= link_to book_from_post(post).title, book_from_post(post) %></h6>
+          <h6 class="card-title mb-2"><%= link_to post.postable.title, post.postable %></h6>
           <!--저자-->
-          <div class="card-subtitle mb-2 text-muted"><%= book_from_post(post).authors %></div>
+          <div class="card-subtitle mb-2 text-muted"><%= post.postable.authors %></div>
           
           <!--포스트 정보-->
           <div class="information">
