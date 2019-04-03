@@ -11,11 +11,13 @@
         
         <h4 class="card-title mb-2"><%= params[:title].html_safe %></h4>
         <div class="card-subtitle my-3 ml-2">
-          <% if params[:category].present? %>
+          <%# if params[:category].present? %>
+          <!--
             <div>
-  				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= params[:category].html_safe %>
+  				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%#= params[:category].html_safe %>
   				  </div>
-          <% end %>
+  				-->
+          <%# end %>
 				  
           <% if params[:authors].present? %>
             <div>
@@ -71,7 +73,7 @@
               <%= form.hidden_field :url, :value => params[:url].html_safe %>
               <%= form.hidden_field :date_time, :value => params[:date_time].html_safe %>
               <%= form.hidden_field :translators, :value => params[:translators].html_safe %>
-              <%= form.hidden_field :category, :value => params[:category].html_safe %>
+              <%#= form.hidden_field :category, :value => params[:category].html_safe %>
 
               <%= form.fields_for :posts do |posts_field| %>
                 <%= posts_field.hidden_field :user_id, :value => current_user.id %>

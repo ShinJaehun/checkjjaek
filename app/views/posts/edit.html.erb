@@ -11,11 +11,14 @@
         
         <h4 class="card-title mb-2"><%= @post.postable.title %></h4>
         <div class="card-subtitle my-3 ml-2">
-  			  <% if @post.postable.category.present? %>
+          
+  			  <%# if @post.postable.category.present? %>
+          <!--
             <div>
-  				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%= @post.postable.category.html_safe %>
+  				    <strong class="text-muted">분류</strong>&nbsp;&nbsp;<%#= @post.postable.category.html_safe %>
   				  </div>
-          <% end %>
+  				-->
+          <%# end %>
   			  
           <% if @post.postable.authors.present? %>
             <div>

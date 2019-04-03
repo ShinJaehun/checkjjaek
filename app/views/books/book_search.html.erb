@@ -28,13 +28,12 @@
                   contents:  strip_tags(item['contents']),
                   url: strip_tags(item['url']),
                   date_time: strip_tags(item['datetime'][0..9]),
-                  translators: strip_tags(item['translators'].join(",")),
-                  category: strip_tags(item['category'])) %>
+                  translators: strip_tags(item['translators'].join(","))) %>
             </div>
             <div class="writers text-muted">
-              <% if item['category'].present? %>
-                <%= item['category'].html_safe %> | 
-              <% end %>
+              <%# if item['category'].present? %>
+                <%#= item['category'].html_safe %> | 
+              <%# end %>
               <% if item['authors'].present? %>
                 <%= item['authors'].join(",").html_safe %><span>저</span> | 
               <% end %>

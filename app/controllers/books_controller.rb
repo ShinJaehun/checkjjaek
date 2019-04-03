@@ -28,9 +28,10 @@ class BooksController < ApplicationController
 
         end
         
-        url = "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s 
+        # url = "https://dapi.kakao.com/v2/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s 
         # url = "https://dapi.kakao.com/v2/search/book?target=title&query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s 
-        
+        url = "https://dapi.kakao.com/v3/search/book?query=" + @keyword_book + "&size=" + @size.to_s + "&page=" + @current_page.to_s
+
         uri = URI.encode(url)
         res = RestClient.get(uri, headers={
           'Authorization' => Rails.application.credentials.kakao[:authorization_key]})
@@ -111,7 +112,6 @@ class BooksController < ApplicationController
         url: book_params[:url],
         date_time: book_params[:date_time],
         translators: book_params[:translators],
-        category: book_params[:category]
       )
       
     end
@@ -132,7 +132,7 @@ class BooksController < ApplicationController
   end
   
   def book_params
-    params.require(:book).permit(:title, :isbn, :authors, :thumbnail, :publisher, :contents, :url, :date_time, :translators, :category, posts_attributes: [:user_id, :content])
+    params.require(:book).permit(:title, :isbn, :authors, :thumbnail, :publisher, :contents, :url, :date_time, :translators, posts_attributes: [:user_id, :content])
   end
   
   # def post_params
