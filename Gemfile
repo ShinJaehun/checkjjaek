@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.1'
 
 # bootstrap
-gem 'bootstrap', '~>4.1.1'
+gem 'bootstrap', '~>4.3.1'
 gem 'jquery-rails'
 
 # RESTful API 처리
