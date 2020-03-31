@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @favorite_posts = Post.all.sort{|a,b| b.like_users.count <=> a.like_users.count}.first(10)
 
     @posts = Post.where(user_id: current_user.followees.ids.push(current_user.id)).order(created_at: :desc)
-    
+
   end
 
   # GET /posts/1

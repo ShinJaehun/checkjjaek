@@ -37,6 +37,7 @@ class Ability
       can :book_search, Book
       
       can :manage, Book
+      can :manage, Message
       
     end
     

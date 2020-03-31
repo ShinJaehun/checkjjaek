@@ -109,11 +109,32 @@
   <div class="col-md-8 order-md-1">
     <div class="book-search-form">
       <%= form_tag book_search_path, method: :get, class: "input-group mt-4" do %>
-        <%= text_field_tag :keyword_book, params[:keyword_book], require: true, class: "form-control search-book-input", placeholder: "무슨 책을 읽었나요?" %>
+        <%= text_field_tag :keyword_book, params[:keyword_book], require: true, class: "form-control search-book-input", placeholder: "어떤 책을 읽었나요?" %>
         <div class="input-group-btn">
           <%= submit_tag '책 찾기', class: "btn btn-outline-secondary" %>
         </div>
       <% end %>
+    </div>
+
+    <div class="book-search-form">
+      <%= link_to '글 남기기', new_message_path %>
+      <%#= form_tag message_path, method: :post, class: "input-grpup mt-4" do %>
+        <%#= text_field_tag :message_content, params[:message_content], require: true,  class: "form-control search-book-input", placeholder: "어떤 이야기를 나눌까요?" %>
+          <%#= submit_tag '글 남기기', class: "btn btn-outline-secondary" %>
+      <%# end %>
+
+      <%#= form_for Message.new do |form| %>
+        <%#= form.hidden_field :sender_id, :value => current_user.id %>
+        <%#= form.hidden_field :receiver_id, :value => current_user.id %>
+
+        <%#= form.fields_for Post.new do |posts_field| %>
+          <%#= posts_field.hidden_field :user_id, :value => current_user.id %>
+          <%#= posts_field.text_area :content, id: "textarea", require: true, placeholder: "어떤 이야기를 나눌까요?" %>
+        <%# end %>
+
+        <%#= form.submit '글 남기기', class: "btn btn-outline-secondary" %>
+
+      <%# end %>
     </div>
 
     <%= render 'list' %>

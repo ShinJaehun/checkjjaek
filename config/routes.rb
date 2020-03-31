@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resources :posts, module: :photos
   end
 
+  resources :messages do
+    resources :posts, module: :messages
+  end
+
   resources :users, only:[:show] do
     post 'follow', to: 'users#follow', as: :follow, on: :member
   end

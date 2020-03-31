@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   # counter_cache는 post 수에 따른 user 리스트를 얻기 위해서
   belongs_to :user, :counter_cache => :posts_count
 
-  # Book과 Post의 1:N 관계
+  # Book과 Post의 1:N 관계(Message와의 관계는 명시할 필요 없음)
   # belongs_to :book
   belongs_to :postable, polymorphic: true
   

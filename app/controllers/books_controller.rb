@@ -86,7 +86,7 @@ class BooksController < ApplicationController
   def new
 
     @book = Book.new
-    @book.posts.new    
+    @book.posts.new
 
   end
   
@@ -99,7 +99,7 @@ class BooksController < ApplicationController
       unless thumbnail_url.to_s.empty?
         thumbnail_path = URI.unescape(thumbnail_url.match(/^http.+?(http.+?)%3F/)[1].to_s)
       else
-        thumbnail_path = nil  
+        thumbnail_path = nil
       end
   
       @book = Book.create(
@@ -119,7 +119,7 @@ class BooksController < ApplicationController
     # post = Post.new(content: book_params[:posts_attributes]['0'][:content])
     post = @book.posts.new(content: book_params[:posts_attributes]['0'][:content])
     post.user_id = book_params[:posts_attributes]['0'][:user_id]
-    post.save      
+    post.save
 
     redirect_to root_path
     
