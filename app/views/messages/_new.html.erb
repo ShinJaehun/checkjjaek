@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Message 생성</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span ara-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row py-2">
+  <div class="new-card card my-4">
+    <div class="content-input">
+      <div class="row">
+        <%= image_tag avatar_url(current_user), class: "rounded-circle user-photo" %>
+        <div class="content-panel">
+          
+          <%= form_for(@message) do |form| %>
+            <div class="modal-body">
+              <%= form.hidden_field :sender_id, :value => current_user.id %>
+              <%= form.hidden_field :receiver_id, :value => current_user.id %>
+      
+              <%= form.fields_for :posts do |posts_field| %>
+                <%= posts_field.hidden_field :user_id, :value => current_user.id %>
+                <%= posts_field.text_area :content, id: "textarea", require: true, placeholder: "어떤 이야기를 나눌까요?" %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <div class="actions">
+                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">취소</button>
+                <%= form.submit '글 남기기', class: "btn btn-outline-secondary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

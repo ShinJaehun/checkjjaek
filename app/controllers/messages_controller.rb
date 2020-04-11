@@ -9,6 +9,10 @@ class MessagesController < ApplicationController
     puts '#########################################################'
     @message = Message.new
     @message.posts.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
   end
   
