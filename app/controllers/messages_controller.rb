@@ -16,10 +16,6 @@ class MessagesController < ApplicationController
 
     puts '#########################################################'
     puts 'CREATE ACTION'
-    # 얘는 message에 해당하는 sender_id와 receiver_id 밖에 없음...
-    puts message_params
-    puts message_params[:posts_attributes]
-    puts message_params[:posts_attributes][:content]
     puts '#########################################################'
 
     @message = Message.create(
@@ -49,6 +45,7 @@ class MessagesController < ApplicationController
     puts '#########################################################'
   end
   def message_params
+    
     params.require(:message).permit(:sender_id, :receiver_id, posts_attributes: [:user_id, :content])
   end
 end

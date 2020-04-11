@@ -68,7 +68,6 @@ class PostsController < ApplicationController
   # POST /posts.json
   # def create
   #   @post = @postable.posts.new(post_params)
-  #   # 어느 순간에 postable이 정상적으로 작동되었는지 도저히 알 수가 없다...
   #   @post.user = current_user
 
   #   respond_to do |format|
