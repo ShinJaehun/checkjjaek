@@ -7,12 +7,12 @@ class MessagesController < ApplicationController
     puts '#########################################################'
     puts 'New ACTION'
     puts '#########################################################'
-    @message = Message.new
-    @message.posts.new
-    respond_to do |format|
-      format.html
-      format.js
-    end
+#    @message = Message.new
+#    @message.posts.new
+#    respond_to do |format|
+#      format.html
+#      format.js
+#    end
 
   end
   
@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
 
     puts '#########################################################'
     puts 'CREATE ACTION'
+    puts message_params
     puts '#########################################################'
 
     @message = Message.create(
@@ -50,6 +51,8 @@ class MessagesController < ApplicationController
   end
   def message_params
     
+#    params.require(:message).permit(:sender_id, :receiver_id)
+#    params.require(:post).permit(:user_id, :content)
     params.require(:message).permit(:sender_id, :receiver_id, posts_attributes: [:user_id, :content])
   end
 end

@@ -119,31 +119,36 @@
     <div class="book-search-form">
       <%#= link_to '글 남기기', new_message_path  %>
 
-      <%= link_to '글 남기기', new_message_path, remote: true, data: { target: '#modal-window', toggle: 'modal' }, class: 'btn btn-primary' %>
+      <%#= link_to '글 남기기', new_message_path, remote: true, data: { target: '#modal-window', toggle: 'modal' }, class: 'btn btn-primary' %>
+      <!--
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
           </div>
         </div>
       </div>
+      -->
 
       <%#= form_tag message_path, method: :post, class: "input-grpup mt-4" do %>
         <%#= text_field_tag :message_content, params[:message_content], require: true,  class: "form-control search-book-input", placeholder: "어떤 이야기를 나눌까요?" %>
           <%#= submit_tag '글 남기기', class: "btn btn-outline-secondary" %>
       <%# end %>
 
-      <%#= form_for Message.new do |form| %>
-        <%#= form.hidden_field :sender_id, :value => current_user.id %>
-        <%#= form.hidden_field :receiver_id, :value => current_user.id %>
+      <% message = Message.new %>
+      <% message.posts.new %>
 
-        <%#= form.fields_for Post.new do |posts_field| %>
-          <%#= posts_field.hidden_field :user_id, :value => current_user.id %>
-          <%#= posts_field.text_area :content, id: "textarea", require: true, placeholder: "어떤 이야기를 나눌까요?" %>
-        <%# end %>
+      <%= form_for message do |form| %>
+        <%= form.hidden_field :sender_id, :value => current_user.id %>
+        <%= form.hidden_field :receiver_id, :value => current_user.id %>
 
-        <%#= form.submit '글 남기기', class: "btn btn-outline-secondary" %>
+        <%= form.fields_for :posts do |posts_field| %>
+          <%= posts_field.hidden_field :user_id, :value => current_user.id %>
+          <%= posts_field.text_area :content, id: "textarea", require: true, placeholder: "어떤 이야기를 나눌까요?" %>
+        <% end %>
 
-      <%# end %>
+        <%= form.submit '글 남기기', class: "btn btn-outline-secondary" %>
+
+      <% end %>
     </div>
 
     <%= render 'list' %>
